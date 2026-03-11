@@ -1,0 +1,31 @@
+﻿.hero-section {
+    background: #eac461;
+    padding: 80px 0;
+}
+
+.hero-img {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.signin-btn {
+    background: #f3c74d;
+    border: none;
+    padding: 7px 18px;
+    font-weight: 600;
+}
+
+.footer-section {
+    background: #dcdcdc;
+    padding: 40px 0;
+}
+
+    .footer-section h5 {
+        font-weight: 600;
+    }
+
+    .footer-section p {
+        margin-bottom: 6px;
+    }

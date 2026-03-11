@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>T2P Apartment Management</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* Navbar */
+
+        .navbar {
+            background: #0d2f5b;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 60px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+            .nav-links a {
+                color: white;
+                text-decoration: none;
+            }
+
+        .signin-btn {
+            background: #f3c74d;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Hero Section */
+
+        .hero-section {
+            background: #eac461;
+            padding: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hero-text {
+            width: 50%;
+        }
+
+            .hero-text h1 {
+                font-size: 42px;
+            }
+
+        .hero-img {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* Footer */
+
+        .footer {
+            background: #dcdcdc;
+            padding: 40px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .footer-box {
+            width: 30%;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Navbar -->
+
+    <nav class="navbar">
+
+        <div class="logo">T2P</div>
+
+        <ul class="nav-links">
+
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Why Choose Us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Apartments</a></li>
+
+        </ul>
+
+        <button class="signin-btn">Sign In</button>
+
+    </nav>
+
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+
+    <!-- Footer -->
+
+    <footer class="footer">
+
+        <div class="footer-box">
+
+            <h3>T2P Estate</h3>
+            <p>Copyright © 2026 T2P</p>
+            <p>Designed by T2P</p>
+
+        </div>
+
+        <div class="footer-box">
+
+            <h3>About Us</h3>
+
+            <p>
+                To bridge the gap between residents and management through
+                intuitive technology ensuring better communication,
+                transparency and convenience for all.
+            </p>
+
+        </div>
+
+        <div class="footer-box">
+
+            <h3>Contact Info</h3>
+
+            <p>Umiya Chowk, Rajkot, Gujarat</p>
+            <p>+91 7984321544</p>
+            <p>rnv123@gmail.com</p>
+
+        </div>
+
+    </footer>
+
+</body>
+</html>
