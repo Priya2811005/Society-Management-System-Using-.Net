@@ -27,7 +27,18 @@ namespace Society_Management_System.Controllers
         {
             return View();
         }
-        
+
+        public IActionResult ContactUs()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult SendMessage(string Name, string Email, string Message)
+        {
+            ViewBag.Message = "Message Sent Successfully!";
+            return View("ContactUs");
+        }
 
         public IActionResult Privacy()
         {
