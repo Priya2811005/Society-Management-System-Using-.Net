@@ -28,6 +28,12 @@ namespace Society_Management_System.Controllers
             return View();
         }
 
+        public IActionResult WhyChooseUs()
+        { 
+             return View(); 
+
+        }
+
         public IActionResult ContactUs()
         {
             return View();
