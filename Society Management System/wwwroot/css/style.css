@@ -30,6 +30,7 @@
     .navbar .logo-text {
         font-size: 26px;
         font-weight: bold;
+
     }
 
 /* Sign in button */
@@ -88,4 +89,8 @@ footer {
     padding: 40px;
     display: flex;
     justify-content: space-between;
+}
+.footer-logo {
+    width: 120px;
+    margin-bottom: 10px;
 }

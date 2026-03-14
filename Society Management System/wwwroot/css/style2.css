@@ -1,0 +1,102 @@
+﻿/* General layout colors */
+:root {
+    --t2p-navy: #002347; /* The dark blue from your header */
+    --t2p-yellow: #ffcc33; /* The gold/yellow for the Sign In button and footer logo */
+    --t2p-gray: #e9ecef; /* Light gray for the footer background */
+}
+
+/* Navbar Styling */
+.navbar-custom {
+    background-color: var(--t2p-navy);
+}
+
+    .navbar-custom .nav-link {
+        color: white !important;
+        font-size: 0.95rem;
+    }
+
+        .navbar-custom .nav-link.active-link {
+            text-decoration: underline;
+            text-underline-offset: 8px;
+        }
+
+.btn-signin {
+    background-color: var(--t2p-yellow);
+    color: black;
+    font-weight: 600;
+    border-radius: 4px;
+    padding: 5px 20px;
+    border: none;
+}
+
+/* Card Styling */
+.feature-card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease-in-out;
+    background: #fff;
+    padding: 25px 15px;
+    height: 100%;
+}
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+    }
+
+.feature-icon {
+    font-size: 24px;
+    color: #0056b3;
+    margin-bottom: 15px;
+}
+
+.feature-title {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.feature-text {
+    font-size: 0.85rem;
+    color: #555;
+    line-height: 1.4;
+}
+
+/* Content Section */
+.about-image {
+    width: 100%;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.btn-learn-more {
+    border: 1px solid var(--t2p-navy);
+    color: var(--t2p-navy);
+    border-radius: 5px;
+    padding: 8px 25px;
+    font-weight: 500;
+}
+
+/* Footer Section */
+.footer-container {
+    background-color: #d1d4d7; /* Match the gray tone in your image */
+    padding: 50px 0;
+    margin-top: 50px;
+    color: #212529;
+}
+
+.footer-logo-box {
+    background-color: var(--t2p-yellow);
+    padding: 20px;
+    display: inline-block;
+    width: 180px;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.footer-logo-text {
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-top: 10px;
+    font-size: 0.8rem;
+}
