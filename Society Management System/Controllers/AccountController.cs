@@ -12,6 +12,37 @@ namespace Society_Management_System.Controllers
             return View();
         }
 
+        // REGISTER PAGE
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        // REGISTER POST
+        [HttpPost]
+        public IActionResult Register(string FullName, string Email, string Phone, string Password, string ConfirmPassword)
+        {
+            if (string.IsNullOrEmpty(FullName) || string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password))
+            {
+                ViewBag.Error = "All fields are required";
+                return View();
+            }
+
+            if (Password != ConfirmPassword)
+            {
+                ViewBag.Error = "Passwords do not match";
+                return View();
+            }
+
+            // Here you will normally save user into database
+            // Example: Save FullName, Email, Phone, Password
+
+            ViewBag.Message = "Registration Successful! Please Login.";
+
+            return RedirectToAction("Login");
+        }
+
+
         // FORGOT PASSWORD PAGE
         public IActionResult Forget()
         {
