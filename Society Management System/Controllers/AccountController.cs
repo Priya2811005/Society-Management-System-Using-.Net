@@ -34,14 +34,9 @@ namespace Society_Management_System.Controllers
                 return View();
             }
 
-            // Here you will normally save user into database
-            // Example: Save FullName, Email, Phone, Password
-
             ViewBag.Message = "Registration Successful! Please Login.";
-
             return RedirectToAction("Login");
         }
-
 
         // FORGOT PASSWORD PAGE
         public IActionResult Forget()
@@ -99,10 +94,30 @@ namespace Society_Management_System.Controllers
 
         // RESET PASSWORD POST
         [HttpPost]
-        public IActionResult ResetPassword(string password)
+        public IActionResult ResetPassword(string password, string confirmPassword)
         {
-            ViewBag.Message = "Password Reset Successfully";
+            if (string.IsNullOrEmpty(password) || string.IsNullOrEmpty(confirmPassword))
+            {
+                ViewBag.Error = "Please fill all fields";
+                return View();
+            }
+
+            if (password != confirmPassword)
+            {
+                ViewBag.Error = "Passwords do not match";
+                return View();
+            }
+
+            // Here you would normally update password in database
+
+            return RedirectToAction("ResetPasswordSuccess");
+        }
+
+        // PASSWORD RESET SUCCESS PAGE
+        public IActionResult ResetPasswordSuccess()
+        {
             return View();
         }
+
     }
 }
