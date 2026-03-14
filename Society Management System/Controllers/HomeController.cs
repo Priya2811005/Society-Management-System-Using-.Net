@@ -40,6 +40,12 @@ namespace Society_Management_System.Controllers
             return View("ContactUs");
         }
 
+        public IActionResult WhyChooseUs()
+        {
+            return View();
+        }
+
+
         public IActionResult Privacy()
         {
             return View();
