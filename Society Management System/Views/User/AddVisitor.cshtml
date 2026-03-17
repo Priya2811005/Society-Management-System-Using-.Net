@@ -1,0 +1,186 @@
+﻿@{
+    ViewData["Title"] = "Visitor Management";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<style>
+
+    body {
+        background: #f4f6f9;
+    }
+
+    h3 {
+        font-weight: 700;
+    }
+
+    /* Sidebar buttons */
+    .sidebar-btn {
+        width: 100%;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        padding: 8px;
+        font-weight: 500;
+    }
+
+    .active-btn {
+        background: #0d2f5b;
+        color: white;
+        border: none;
+    }
+
+    .inactive-btn {
+        background: #f1f3f6;
+        border: 1px solid #0d2f5b;
+        color: #0d2f5b;
+    }
+
+        .inactive-btn:hover {
+            background: #e6ebf3;
+        }
+
+    /* Form Card */
+    .form-card {
+        border: 1px solid #4a6fa5;
+        border-radius: 10px;
+        padding: 25px;
+        background: #eef2f7;
+    }
+
+    /* Inputs */
+    .form-control {
+        border-radius: 8px;
+    }
+
+    /* Submit button */
+    .submit-btn {
+        background: #0d2f5b;
+        color: white;
+        border: none;
+        padding: 8px 30px;
+        border-radius: 8px;
+        font-weight: 500;
+    }
+
+        .submit-btn:hover {
+            background: #092447;
+        }
+
+</style>
+
+
+<div class="container mt-4">
+
+    <!-- Page Title -->
+    <h3>Visitor Management</h3>
+    <p class="text-muted">Submit and manage your visitor requests.</p>
+
+    <div class="row mt-4">
+
+        <!-- Sidebar -->
+        <div class="col-md-2">
+
+            <button class="sidebar-btn active-btn">
+                Add Visitor Request
+            </button>
+
+            <a asp-action="VisitorList"
+               asp-controller="Visitors"
+               class="sidebar-btn inactive-btn text-decoration-none d-block text-center">
+
+                Visitor Request List
+
+            </a>
+
+        </div>
+
+
+        <!-- Form Section -->
+        <div class="col-md-7">
+
+            <h3 class="mb-3">Add Visitor Request</h3>
+
+            <div class="form-card">
+
+                <form asp-action="Create"
+                      asp-controller="Visitors"
+                      method="post">
+
+                    <!-- Visitor Name -->
+                    <div class="mb-3">
+
+                        <label class="form-label fw-semibold">
+                            Visitor Name
+                        </label>
+
+                        <input type="text"
+                               class="form-control"
+                               name="VisitorName"
+                               placeholder="Enter Visitor Name"
+                               required />
+
+                    </div>
+
+                    <!-- Purpose -->
+                    <div class="mb-3">
+
+                        <label class="form-label fw-semibold">
+                            Purpose
+                        </label>
+
+                        <input type="text"
+                               class="form-control"
+                               name="Purpose"
+                               placeholder="Enter Purpose of visit"
+                               required />
+
+                    </div>
+
+                    <!-- Contact Number -->
+                    <div class="mb-3">
+
+                        <label class="form-label fw-semibold">
+                            Contact Number
+                        </label>
+
+                        <input type="text"
+                               class="form-control"
+                               name="ContactNumber"
+                               placeholder="Enter Contact Number"
+                               required />
+
+                    </div>
+
+                    <!-- Details -->
+                    <div class="mb-3">
+
+                        <label class="form-label fw-semibold">
+                            Details for Visit
+                        </label>
+
+                        <textarea class="form-control"
+                                  rows="3"
+                                  name="Details"
+                                  placeholder="Enter visit details"
+                                  required></textarea>
+
+                    </div>
+
+                    <!-- Submit -->
+                    <div class="text-center mt-3">
+
+                        <button type="submit" class="submit-btn">
+                            Submit Request
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
