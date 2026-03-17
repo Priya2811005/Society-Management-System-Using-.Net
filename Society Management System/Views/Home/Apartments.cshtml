@@ -1,0 +1,135 @@
+﻿
+@{
+    ViewData["Title"] = "Apartments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewData["Title"] = "Apartments";
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+
+<div class="container py-5" id="apartments">
+
+    <!-- Title -->
+
+    <h2 class="text-center fw-bold mb-2" data-aos="fade-up">
+        Apartments
+    </h2>
+
+    <p class="text-center text-muted mb-4" data-aos="fade-up" data-aos-delay="200">
+        Quis in porttitor purus sed
+    </p>
+
+    <!-- Cards -->
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+
+        <!-- Card 1 -->
+
+        <div class="col" data-aos="zoom-in" data-aos-delay="300">
+
+            <div class="card h-100 text-center bg-light">
+
+                <div class="card-body p-4">
+
+                    <div class="display-4 mb-3">🏢</div>
+
+                    <h5 class="fw-bold">View Apartments</h5>
+
+                    <p class="text-muted">
+                        Browse through the available apartments in your community.
+                    </p>
+
+                </div>
+
+                <div class="card-footer bg-transparent border-0">
+
+                    <a href="#" class="btn btn-outline-dark">
+                        Know More
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Card 2 -->
+
+        <div class="col" data-aos="zoom-in" data-aos-delay="400">
+
+            <div class="card h-100 text-center bg-light">
+
+                <div class="card-body p-4">
+
+                    <div class="display-4 mb-3">🛠</div>
+
+                    <h5 class="fw-bold">Manage Apartments</h5>
+
+                    <p class="text-muted">
+                        Efficiently manage and update apartment details.
+                    </p>
+
+                </div>
+
+                <div class="card-footer bg-transparent border-0">
+
+                    <a href="#" class="btn btn-outline-dark">
+                        Know More
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Card 3 -->
+
+        <div class="col" data-aos="zoom-in" data-aos-delay="500">
+
+            <div class="card h-100 text-center bg-light">
+
+                <div class="card-body p-4">
+
+                    <div class="display-4 mb-3">🔍</div>
+
+                    <h5 class="fw-bold">Search Apartments</h5>
+
+                    <p class="text-muted">
+                        Find all the details about your apartment.
+                    </p>
+
+                </div>
+
+                <div class="card-footer bg-transparent border-0">
+
+                    <a href="#" class="btn btn-outline-dark">
+                        Know More
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+<script>
+    AOS.init({
+        duration: 1000
+    });
+</script>
+
+

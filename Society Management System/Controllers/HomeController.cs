@@ -34,10 +34,18 @@ namespace Society_Management_System.Controllers
 
         }
 
-        public IActionResult ContactUs()
+        public IActionResult Apartments()
         {
             return View();
         }
+
+        public IActionResult ContactUs()
+        {
+            return View();
+
+        }
+
+
 
         [HttpPost]
         public IActionResult SendMessage(string Name, string Email, string Message)
