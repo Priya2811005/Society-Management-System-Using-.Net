@@ -20,9 +20,7 @@
     <div class="row">
 
         <!-- LEFT SIDE CARDS -->
-
         <div class="col-md-6">
-
             <div class="row">
 
                 <!-- Address -->
@@ -89,13 +87,10 @@
                 </div>
 
             </div>
-
         </div>
 
         <!-- RIGHT SIDE FORM -->
-
         <div class="col-md-6" data-aos="fade-up" data-aos-delay="700">
-
             <div class="card p-4 border-0" style="background:#052C65;color:white">
 
                 <h4 class="text-center mb-4">Send a Message</h4>
@@ -104,17 +99,17 @@
 
                     <div class="mb-3">
                         <label>Name</label>
-                        <input type="text" name="Name" class="form-control" placeholder="Your Name">
+                        <input type="text" name="Name" class="form-control" placeholder="Your Name" required>
                     </div>
 
                     <div class="mb-3">
                         <label>Email</label>
-                        <input type="email" name="Email" class="form-control" placeholder="Your Email">
+                        <input type="email" name="Email" class="form-control" placeholder="Your Email" required>
                     </div>
 
                     <div class="mb-3">
                         <label>Message</label>
-                        <textarea name="Message" rows="4" class="form-control" placeholder="Your Message"></textarea>
+                        <textarea name="Message" rows="4" class="form-control" placeholder="Your Message" required></textarea>
                     </div>
 
                     <button type="submit" class="btn btn-outline-light w-100">
@@ -124,13 +119,29 @@
                 </form>
 
             </div>
-
         </div>
 
     </div>
 
 </div>
 
+<!-- SweetAlert CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- Popup Message -->
+@if (TempData["SuccessMessage"] != null)
+{
+    <script>
+        Swal.fire({
+            title: 'Success!',
+            text: '@TempData["SuccessMessage"]',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    </script>
+}
+
+<!-- AOS Animation -->
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
 <script>
