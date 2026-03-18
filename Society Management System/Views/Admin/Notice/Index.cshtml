@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+<!-- ADD THIS INSIDE YOUR NOTICE PAGE -->
+
+<h2 class="page-title">Admin - Manage Notices</h2>
+<p class="sub-text">Manage the Notice for Your Community. Create, edit, and delete notices.</p>
+
+<button class="submit-btn" onclick="openModal(); setActiveMenu()" id="addNoticeBtn">
+    Add New Notice
+</button>
+
+<!-- MODAL -->
+<div id="noticeModal" class="modal">
+    <div class="modal-content">
+
+        <div class="modal-header">Add Notice</div>
+
+        <div class="form-row">
+            <label>Title :</label>
+            <input type="text" />
+        </div>
+
+        <div class="form-row">
+            <label>Description :</label>
+            <input type="text" />
+        </div>
+
+        <div class="form-row">
+            <label>Date :</label>
+            <input type="date" />
+        </div>
+
+        <div class="form-row">
+            <label>Status :</label>
+            <input type="text" />
+        </div>
+
+        <div class="form-row button-row">
+            <button class="submit-btn" onclick="closeModal()">Add Notice</button>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- ADD THIS SCRIPT -->
+<!-- Your Notice Page Content -->
+
+<script>
+    function openModal() {
+        document.getElementById("noticeModal").style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById("noticeModal").style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        let modal = document.getElementById("noticeModal");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // Highlight Notice menu
+    document.querySelectorAll('.sidebar ul li a').forEach(function (item) {
+        item.classList.remove('active');
+
+        if (item.textContent.includes("Notice")) {
+            item.classList.add('active');
+        }
+    });
+</script>
+
