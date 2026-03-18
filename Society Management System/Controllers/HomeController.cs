@@ -1,6 +1,5 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Society_Management_System.Models;
 
 namespace Society_Management_System.Controllers
 {

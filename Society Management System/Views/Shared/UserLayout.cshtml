@@ -1,46 +1,27 @@
 ﻿<!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
-</head>
-<body>
-    <div>
-        @RenderBody()
-    </div>
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>User Dashboard </title>
+    <title>@ViewBag.Title - User Dashboard</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="~/css/admin.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 </head>
 
 <body>
 
     <!-- Sidebar -->
     <div class="sidebar">
-
         <h2>T2P</h2>
-
         <ul>
-
             <li>
                 <a class="active" asp-controller="Dashboard" asp-action="Index">
                     <i class="fa-solid fa-chart-line"></i> Dashboard
                 </a>
             </li>
-
-
-
 
             <li>
                 <a asp-controller="Complaint" asp-action="Index">
@@ -59,26 +40,19 @@
                     <i class="fa-solid fa-user-check"></i> Visitor Management
                 </a>
             </li>
-
         </ul>
-
     </div>
-
 
     <!-- Top Header -->
     <div class="top-header">
-
         <div class="profile-right">
-
             <div class="profile-menu">
-
                 <button class="profile-btn" onclick="toggleMenu()">
                     <i class="fa-solid fa-user"></i>
                     <i class="fa-solid fa-caret-down"></i>
                 </button>
 
                 <div class="dropdown-menu" id="profileDropdown">
-
                     <a asp-controller="Account" asp-action="Profile">
                         <i class="fa-solid fa-id-card"></i> My Profile
                     </a>
@@ -86,25 +60,18 @@
                     <a asp-controller="Account" asp-action="Logout">
                         <i class="fa-solid fa-right-from-bracket"></i> Logout
                     </a>
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
 
     <!-- Main Content -->
     <div class="main-content">
         @RenderBody()
     </div>
 
-
-    <!-- Profile Dropdown Script -->
+    <!-- Script -->
     <script>
-
         function toggleMenu() {
             document.getElementById("profileDropdown").classList.toggle("show");
         }
@@ -114,7 +81,6 @@
                 document.getElementById("profileDropdown").classList.remove("show");
             }
         }
-
     </script>
 
 </body>
