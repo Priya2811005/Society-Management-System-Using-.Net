@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+@* @{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+} *@
+
+
+<div class="form-container">
+
+    <h3>Add Members</h3>
+    <p class="sub-text">Add new members to the Apartment</p>
+
+    <form>
+
+        <div class="form-row">
+            <label>Name :</label>
+            <input type="text" />
+        </div>
+
+        <div class="form-row">
+            <label>Contact :</label>
+            <input type="text" />
+        </div>
+
+        <div class="form-row">
+            <label>Email :</label>
+            <input type="email" />
+        </div>
+
+        <div class="form-row">
+            <label>Apartment No :</label>
+            <input type="text" class="small-input" />
+
+            <label class="wing-label">Wing :</label>
+            <input type="text" class="small-input" />
+        </div>
+
+        <div class="form-row">
+            <label>Family-Members :</label>
+            <input type="text" />
+        </div>
+
+        <div class="form-row">
+            <label>Joining Date :</label>
+            <input type="date" />
+        </div>
+
+        <div class="form-row button-row">
+            <button type="submit" class="submit-btn">Add Member</button>
+        </div>
+
+    </form>
+
+</div>
+
+<script>
+    document.querySelectorAll('.sidebar ul li a').forEach(function (item) {
+        item.classList.remove('active');
+
+        if (item.textContent.includes("Add Member")) {
+            item.classList.add('active');
+        }
+    });
+</script>
+

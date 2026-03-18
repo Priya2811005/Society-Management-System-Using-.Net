@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="complaint-container">
+
+    <h3>Complaint Management</h3>
+    <p class="sub-text">
+        Manage the complaints and statuses for all apartment
+    </p>
+
+    <table class="complaint-table">
+
+        <thead>
+            <tr>
+                <th>Complaint Id</th>
+                <th>Apartment No</th>
+                <th>Resident Name</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Created Date</th>
+                <th>Resolved Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            <tr>
+                <td>1</td>
+                <td>101</td>
+                <td>Rahul Shah</td>
+                <td>Water leakage</td>
+                <td class="pending">Pending</td>
+                <td>2025-07-01</td>
+                <td>-</td>
+                <td><span class="btn pending-btn">Resolve</span></td>
+            </tr>
+
+            <tr>
+                <td>2</td>
+                <td>102</td>
+                <td>Priya Patel</td>
+                <td>Lift not working</td>
+                <td class="overdue">In Progress</td>
+                <td>2025-07-02</td>
+                <td>-</td>
+                <td><span class="btn overdue-btn">Resolve</span></td>
+            </tr>
+
+            <tr>
+                <td>3</td>
+                <td>103</td>
+                <td>Amit Kumar</td>
+                <td>Electric issue</td>
+                <td class="paid">Resolved</td>
+                <td>2025-06-28</td>
+                <td>2025-07-01</td>
+                <td><span class="btn paid-btn">Done</span></td>
+            </tr>
+
+            <tr>
+                <td>4</td>
+                <td>104</td>
+                <td>Neha Joshi</td>
+                <td>Parking issue</td>
+                <td class="pending">Pending</td>
+                <td>2025-07-03</td>
+                <td>-</td>
+                <td><span class="btn pending-btn">Resolve</span></td>
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<!-- Highlight Complaint menu -->
+<script>
+    document.querySelectorAll('.sidebar ul li a').forEach(function (item) {
+        item.classList.remove('active');
+
+        if (item.textContent.includes("Complaint")) {
+            item.classList.add('active');
+        }
+    });
+</script>

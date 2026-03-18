@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+<div class="maintenance-container">
+
+    <h3>Admin Maintenance</h3>
+    <p class="sub-text">
+        Manage the maintenance fees and payment statuses to all apartments.
+    </p>
+
+    <table class="maintenance-table">
+
+        <thead>
+            <tr>
+                <th>Apartment</th>
+                <th>Status</th>
+                <th>Due Date</th>
+                <th>Amount</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            <tr>
+                <td>101</td>
+                <td class="paid">Paid</td>
+                <td>2025-07-01</td>
+                <td>$300</td>
+                <td><span class="btn paid-btn">Mark as Paid</span></td>
+            </tr>
+
+            <tr>
+                <td>102</td>
+                <td class="pending">Pending</td>
+                <td>2025-07-05</td>
+                <td>$300</td>
+                <td><span class="btn pending-btn">Send Reminder</span></td>
+            </tr>
+
+            <tr>
+                <td>103</td>
+                <td class="overdue">Overdue</td>
+                <td>2025-06-01</td>
+                <td>$300</td>
+                <td><span class="btn overdue-btn">Send Reminder</span></td>
+            </tr>
+
+            <tr>
+                <td>104</td>
+                <td class="paid">Paid</td>
+                <td>2025-07-20</td>
+                <td>$300</td>
+                <td><span class="btn paid-btn">Mark as Paid</span></td>
+            </tr>
+
+            <tr>
+                <td>105</td>
+                <td class="overdue">Overdue</td>
+                <td>2025-06-05</td>
+                <td>$300</td>
+                <td><span class="btn paid-btn">Mark as Paid</span></td>
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<!-- Highlight Maintenance menu -->
+<script>
+    document.querySelectorAll('.sidebar ul li a').forEach(function (item) {
+        item.classList.remove('active');
+
+        if (item.textContent.includes("Maintenance")) {
+            item.classList.add('active');
+        }
+    });
+</script>
+
