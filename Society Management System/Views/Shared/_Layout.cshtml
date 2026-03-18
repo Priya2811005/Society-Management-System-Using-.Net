@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -22,10 +24,19 @@
             padding: 15px 60px;
         }
 
+            .navbar a {
+                color: white;
+                margin: 0 18px;
+                text-decoration: none;
+                font-size: 20px; /* increase text size */
+                font-weight: 500;
+            }
+
         .logo {
-            font-size: 22px;
+            font-size: 32px; /* bigger logo text */
             font-weight: bold;
         }
+
 
         .nav-links {
             list-style: none;
@@ -41,10 +52,18 @@
         .signin-btn {
             background: #f3c74d;
             border: none;
-            padding: 8px 15px;
-            cursor: pointer;
+            padding: 12px 28px; /* bigger button */
+            font-size: 20px; /* bigger text */
             font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
         }
+
+            /* Optional Hover Effect */
+
+            .signin-btn:hover {
+                background: #e5b93e;
+            }
 
         /* Hero Section */
 
@@ -71,17 +90,41 @@
             object-fit: cover;
         }
 
+
+
         /* Footer */
 
         .footer {
             background: #dcdcdc;
-            padding: 40px;
+            padding: 50px 80px;
             display: flex;
             justify-content: space-between;
         }
 
         .footer-box {
             width: 30%;
+            font-size: 18px; /* bigger text */
+        }
+
+            /* Footer headings */
+
+            .footer-box h3 {
+                font-size: 24px;
+                margin-bottom: 15px;
+            }
+
+            /* Footer text */
+
+            .footer-box p {
+                font-size: 18px;
+                line-height: 1.6;
+            }
+
+        /* Footer logo */
+
+        .footer-logo {
+            width: 150px;
+            margin-bottom: 15px;
         }
 
     </style>
@@ -98,17 +141,18 @@
 
         <ul class="nav-links">
 
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Contact Us</a></li>
-            <li><a href="#">Why Choose Us</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Apartments</a></li>
+            <li><a href="https://localhost:7107/">Home</a></li>
+            <li><a href="https://localhost:7107/Home/About">About Us</a></li>
+            <li><a href="https://localhost:7107/Home/ContactUs">Contact Us</a></li>
+            <li><a href="https://localhost:7107/Home/WhyChooseUS">Why Choose Us</a></li>
+            <li><a href="https://localhost:7107/Home/Services">Services</a></li>
+            <li><a href="https://localhost:7107/Home/Apartments">Apartments</a></li>
 
         </ul>
 
-        <button class="signin-btn">Sign In</button>
-
+<button class="signin-btn" onclick="location.href='/Account/Login'">
+    Sign In
+</button>
     </nav>
 
 
@@ -123,9 +167,12 @@
 
     <footer class="footer">
 
+
+
         <div class="footer-box">
 
-            <h3>T2P Estate</h3>
+            <img src="~/images/logo.png" class="footer-logo" alt="T2P Logo">
+
             <p>Copyright © 2026 T2P</p>
             <p>Designed by T2P</p>
 
@@ -156,4 +203,4 @@
     </footer>
 
 </body>
-</html>
+</html>  

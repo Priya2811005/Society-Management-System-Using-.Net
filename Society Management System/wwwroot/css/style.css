@@ -1,0 +1,96 @@
+﻿body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* NAVBAR */
+
+
+
+.navbar {
+    background: #0c2c5a;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    /* Navbar links */
+
+    .navbar a {
+        color: white;
+        margin: 0 18px;
+        text-decoration: none;
+        font-size: 20px; /* increase text size */
+        font-weight: 500;
+    }
+
+    /* Logo text (T2P) */
+
+    .navbar .logo-text {
+        font-size: 26px;
+        font-weight: bold;
+
+    }
+
+/* Sign in button */
+
+.signin {
+    background: #f4c542;
+    padding: 12px 28px; /* makes button bigger */
+    font-size: 18px; /* bigger text */
+    font-weight: bold;
+    border: none;
+    border-radius: 6px; /* slightly rounded */
+    cursor: pointer;
+}
+
+/* HERO SECTION */
+
+.hero {
+    background: #e9c45b;
+    padding: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* TEXT */
+
+.hero-text {
+    width: 45%;
+}
+
+    .hero-text h1 {
+        font-size: 45px;
+    }
+
+/* LOGO */
+
+.logo-img {
+    width: 220px;
+    height: auto;
+    border-radius: 0 !important;
+}
+
+/* APARTMENT IMAGE */
+
+.apartment-img {
+    width: 550px;
+    height: 550px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* FOOTER */
+
+footer {
+    background: #d9d9d9;
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+.footer-logo {
+    width: 120px;
+    margin-bottom: 10px;
+}

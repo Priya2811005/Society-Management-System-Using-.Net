@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Verify OTP";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<style>
+
+    body {
+        
+    }
+    .theme-color {
+        color: #173b63;
+    }
+
+    .btn-theme {
+        background-color: #173b63;
+        border: none;
+        color: white;
+        font-weight: 500;
+    }
+
+        .btn-theme:hover {
+            background-color: #0f2a47;
+        }
+
+    .otp-card {
+        width: 400px;
+        border-radius: 12px;
+
+    }
+
+</style>
+
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+
+    <div class="card shadow p-4 otp-card">
+
+        <h3 class="text-center mb-4 theme-color">Verify OTP</h3>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger">
+                @ViewBag.Error
+            </div>
+        }
+
+        <form asp-controller="Account" asp-action="VerifyOTP" method="post">
+
+            <div class="mb-3">
+                <label for="otp" class="form-label theme-color">Enter OTP</label>
+                <input type="text" name="otp" id="otp" class="form-control" placeholder="Enter the OTP sent to your email" required autofocus />
+            </div>
+
+            <button type="submit" class="btn btn-theme w-100">Verify OTP</button>
+
+        </form>
+
+        <div class="text-center mt-3">
+            <a href="/Account/Forget" class="text-decoration-none theme-color">← Back to Forgot Password</a>
+        </div>
+
+    </div>
+
+</div>
