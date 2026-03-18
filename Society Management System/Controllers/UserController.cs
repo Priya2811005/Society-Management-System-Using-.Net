@@ -6,6 +6,7 @@ namespace Society_Management_System.Controllers
     {
         public IActionResult Index()
         {
+
             return View();
         }
 
@@ -15,6 +16,11 @@ namespace Society_Management_System.Controllers
             {
                 return View();
             }
-        
+
+
+        public IActionResult Notice()
+        {
+            return Content("Notice page working");
+        }
     }
 }
