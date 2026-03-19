@@ -2,9 +2,10 @@
 
 namespace Society_Management_System.Controllers
 {
+    [Route("User/[controller]/[action]")]
     public class UserController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Dashboard()
         {
 
             return View();
