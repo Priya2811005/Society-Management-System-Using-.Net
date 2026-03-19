@@ -1,0 +1,121 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="visitor-container">
+
+    <h3>Admin - Visitor Management</h3>
+    <p class="sub-text">
+        Manage visitor requests, check-in and check-out for residents.
+    </p>
+
+    <!-- ✅ Add Visitor Button -->
+    <button class="add-btn" onclick="openVisitorModal()">
+        Add Visitor
+    </button>
+
+    <!-- ✅ Table ONLY (no form below) -->
+    <h4>Pending Approval</h4>
+
+    <table class="visitor-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Visitor Name</th>
+                <th>Contact</th>
+                <th>Apartment No</th>
+                <th>Purpose</th>
+                <th>Visit Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Rahul Mehta</td>
+                <td>9876543210</td>
+                <td>101</td>
+                <td>Delivery</td>
+                <td>05-07-2025</td>
+                <td class="pending">Pending</td>
+                <td>
+                    <span class="btn pending-btn">Approve</span>
+                    <span class="btn overdue-btn">Reject</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<!-- ================= POPUP (MODAL FORM) ================= -->
+
+<div id="visitorModal" class="modal">
+    <div class="modal-content">
+
+        <div class="modal-header">Add Visitor</div>
+
+        <div class="form-row">
+            <label>Visitor Name :</label>
+            <input type="text" />
+        </div>
+
+        <div class="form-row">
+            <label>Contact Number :</label>
+            <input type="text" />
+        </div>
+
+        <div class="form-row">
+            <label>Apartment No :</label>
+            <input type="text" />
+        </div>
+
+        <div class="form-row">
+            <label>Purpose :</label>
+            <input type="text" />
+        </div>
+
+        <div class="form-row">
+            <label>Visit Date :</label>
+            <input type="date" />
+        </div>
+
+        <div class="form-row button-row">
+            <button class="submit-btn" onclick="closeVisitorModal()">
+                Add Visitor
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<!-- ================= SCRIPT ================= -->
+
+<script>
+    function openVisitorModal() {
+        document.getElementById("visitorModal").style.display = "block";
+    }
+
+    function closeVisitorModal() {
+        document.getElementById("visitorModal").style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        let modal = document.getElementById("visitorModal");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // Highlight Visitor menu
+    document.querySelectorAll('.sidebar ul li a').forEach(function (item) {
+        item.classList.remove('active');
+
+        if (item.textContent.includes("Visitor")) {
+            item.classList.add('active');
+        }
+    });
+</script>
