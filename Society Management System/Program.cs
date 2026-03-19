@@ -22,14 +22,18 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-app.MapControllerRoute(
-    name: "default",
     pattern: "{controller=User}/{action=Dashboard}/{id?}");
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Dashboard}/{action=Index}/{id?}");
+//app.MapControllerRoute(
+//    name: "default",
+//    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+//app.MapControllerRoute(
+//    name: "default",
+//    pattern: "{controller=User}/{action=Dashboard}/{id?}");
+
+//app.MapControllerRoute(
+//    name: "default",
+//    pattern: "{controller=Dashboard}/{action=Index}/{id?}");
 
 app.Run();

@@ -13,23 +13,18 @@
     <!-- Sidebar -->
     <ul>
         <li>
-            <a class="active" asp-controller="User" asp-action="Dashboard">
+            <a asp-controller="User" asp-action="Dashboard">
                 <i class="fa-solid fa-chart-line"></i> Dashboard
             </a>
         </li>
         <li>
-            <a asp-controller="Complaint" asp-action="Index">
+            <a asp-controller="User" asp-action="AddComplaint">
                 <i class="fa-solid fa-triangle-exclamation"></i> Complaint
             </a>
         </li>
         <li>
-            <a asp-controller="Notice" asp-action="Index">
+            <a asp-controller="User" asp-action="Notice">
                 <i class="fa-solid fa-bullhorn"></i> Notice
-            </a>
-        </li>
-        <li>
-            <a asp-controller="Visitor" asp-action="Index">
-                <i class="fa-solid fa-user-check"></i> Visitor Management
             </a>
         </li>
     </ul>
