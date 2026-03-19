@@ -1,4 +1,4 @@
-namespace Society_Management_System.Models
+namespace YourProjectName.Models
 {
     public class ErrorViewModel
     {

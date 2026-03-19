@@ -1,0 +1,141 @@
+﻿@{
+    ViewBag.Title = "Add Complaint";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+<style>
+    .main-box {
+        padding: 25px;
+    }
+
+    .title {
+        font-size: 22px;
+        font-weight: 600;
+    }
+
+    .subtitle {
+        color: gray;
+        margin-bottom: 20px;
+    }
+
+    .card {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        width: 420px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .tabs {
+        margin-bottom: 15px;
+    }
+
+        .tabs a {
+            padding: 6px 12px;
+            border: 1px solid #0d3b73;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #0d3b73;
+            font-size: 13px;
+            margin-right: 5px;
+        }
+
+        .tabs .active {
+            background: #0d3b73;
+            color: white;
+        }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        font-size: 13px;
+        font-weight: 500;
+    }
+
+    input, textarea {
+        width: 100%;
+        padding: 8px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 13px;
+    }
+
+    textarea {
+        resize: none;
+    }
+
+    .img-preview {
+        width: 100%;
+        height: 120px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        object-fit: cover;
+        margin-top: 8px;
+    }
+
+    .btn-submit {
+        background: #0d3b73;
+        color: white;
+        padding: 8px 18px;
+        border: none;
+        border-radius: 6px;
+        font-size: 13px;
+        cursor: pointer;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+</style>
+
+<div class="main-box">
+
+    <div class="title">Complaint Management</div>
+    <div class="subtitle">Submit and manage your visitor requests.</div>
+
+    <div class="card">
+
+        <div class="tabs">
+            <a href="/Complaint/Index">Complaint List</a>
+            <a href="/Complaint/AddComplaint" class="active">Complaint Form</a>
+        </div>
+
+        <h4>Add Complaint</h4>
+
+        <form asp-controller="Complaint" asp-action="AddComplaint" method="post" enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label>Complaint Date</label>
+                <input type="date" name="ComplaintDate" required />
+            </div>
+
+            <div class="form-group">
+                <label>Description</label>
+                <textarea name="Description" rows="3" placeholder="Type Description Here" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Upload Image</label>
+                <input type="file" name="ImageFile" onchange="previewImage(event)" />
+
+                <img id="preview" class="img-preview" style="display:none;" />
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn-submit">Submit Request</button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<script>
+    function previewImage(event) {
+        const img = document.getElementById("preview");
+        img.src = URL.createObjectURL(event.target.files[0]);
+        img.style.display = "block";
+    }
+</script>
