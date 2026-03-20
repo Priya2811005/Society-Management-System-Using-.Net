@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Society_Management_System.Models;   
+using System;
+using System.Collections.Generic;
 
 namespace Society_Management_System.Controllers
 {
@@ -8,6 +11,8 @@ namespace Society_Management_System.Controllers
         {
             return View();
         }
+
+        // ---------------- Complaint ----------------
 
         public IActionResult AddComplain()
         {
@@ -21,14 +26,16 @@ namespace Society_Management_System.Controllers
             return View();
         }
 
-        public IActionResult ComplaintList(string subject, string description)
+        public IActionResult ComplaintList()
         {
-            ViewBag.Message = "Complaint Submitted Successfully!";
             return View();
         }
 
+        // ---------------- Notice ----------------
+
         public IActionResult Notice()
         {
+            
             return View();
         }
     }
