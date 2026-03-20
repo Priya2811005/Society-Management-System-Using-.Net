@@ -9,8 +9,21 @@ namespace Society_Management_System.Controllers
             return View();
         }
 
-        public IActionResult AddComplaint()
+        public IActionResult AddComplain()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddComplain(string subject, string description)
+        {
+            ViewBag.Message = "Complaint Submitted Successfully!";
+            return View();
+        }
+
+        public IActionResult ComplaintList(string subject, string description)
+        {
+            ViewBag.Message = "Complaint Submitted Successfully!";
             return View();
         }
 
