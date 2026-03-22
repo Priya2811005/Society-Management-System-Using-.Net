@@ -87,9 +87,29 @@
             .grid {
                 grid-template-columns: 1fr;
             }
-        }}
-
+       
         }
+
+
+       .profile-link {
+    color: white !important;   /* force white text */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    text-decoration: none !important; /* remove blue underline */
+}
+
+.profile-link i {
+    color: white !important;  /* white icon */
+    font-size: 20px;
+}
+
+.profile-link:hover {
+    background: #1b3f7a;
+    color: white !important;
+}
+    }
     </style>
 </head>
 
@@ -103,11 +123,13 @@
             <a href="/User/Dashboard">🏠 Dashboard</a>
             <a href="/User/AddComplain">⚠️ Complain</a>
             <a href="/User/Notice">📁 Notice</a>
-            <a href="#">👤 Visitor Management</a>
+            <a href="/User/AddVisitor">👥 Visitor Management</a>
         </div>
 
         <div class="bottom">
-            <a href="#" class="menu">👤 Profile</a>
+            <a href="/User/Profile" class="menu profile-link">
+                <i class="bi bi-person-circle"></i>👤 Profile
+            </a>
         </div>
     </div>
 
