@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "Visitor Management";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+<style>
+    body {
+        background-color: #f4f7fb;
+    }
+
+    .page-title {
+        font-weight: 700;
+        font-size: 24px;
+        color: #0f2f5f;
+    }
+
+    .sub-text {
+        color: #6c757d;
+        font-size: 14px;
+    }
+
+    .side-btn {
+        width: 100%;
+        margin-bottom: 12px;
+        border-radius: 8px;
+        font-weight: 600;
+        padding: 10px;
+    }
+
+    .btn-primary {
+        background-color: #0f2f5f;
+        border: none;
+    }
+
+    .btn-outline-primary {
+        border-color: #0f2f5f;
+        color: #0f2f5f;
+    }
+
+    .form-card {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .form-control {
+        border-radius: 8px;
+        font-size: 14px;
+    }
+
+    label {
+        font-weight: 500;
+    }
+</style>
+
+<div class="container-fluid mt-3">
+
+    <!-- Heading -->
+    <div class="mb-4">
+        <div class="page-title">Visitor Management</div>
+        <div class="sub-text">Submit and manage your visitor requests.</div>
+    </div>
+
+    <div class="row">
+
+        <!-- Left Buttons -->
+        <div class="col-md-2">
+            <a href="#" class="btn btn-primary side-btn">Add Visitor Request</a>
+            <a href="/User/VisitorList" class="btn btn-outline-primary side-btn">Visitor Request List</a>
+        </div>
+
+        <!-- Form Section -->
+        <div class="col-md-6">
+            <div class="form-card">
+
+                <h5 class="mb-3 fw-bold">Add Visitor Request</h5>
+
+                <form>
+                    <div class="mb-3">
+                        <label>Visitor Name</label>
+                        <input type="text" class="form-control" placeholder="Enter Visitor Name" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Purpose</label>
+                        <input type="text" class="form-control" placeholder="Enter Purpose of Visit" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Contact Number</label>
+                        <input type="text" class="form-control" placeholder="Enter Contact Number" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Details for Visit</label>
+                        <textarea class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <div class="text-center mt-3">
+                        <button type="submit" class="btn btn-primary px-4">Submit Request</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
