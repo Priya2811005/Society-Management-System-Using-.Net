@@ -38,5 +38,53 @@ namespace Society_Management_System.Controllers
             
             return View();
         }
+
+
+        // ---------------- AddVisitor ----------------
+
+        public IActionResult AddVisitor()
+        {
+
+            return View();
+        }
+
+
+
+
+        // ---------------- VisitorList----------------
+
+        public IActionResult VisitorList()
+        {
+
+            return View();
+        }
+
+
+
+
+
+
+
+
+
+
+
+        // ---------------- Profile----------------
+
+
+        public IActionResult Profile()
+        {
+            ViewBag.Name = "Trushali";
+            ViewBag.Email = "test@gmail.com";
+            ViewBag.Contact = "9876543210";
+            ViewBag.Flat = "101";
+            ViewBag.Wing = "A";
+
+            return View();
+        }
+
+
+
     }
+
 }
