@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewBag.Title = "My Bookings";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+<style>
+    body {
+        background-color: #f4f7fb;
+    }
+
+    .page-title {
+        font-weight: 700;
+        font-size: 26px;
+        color: #0f2f5f;
+    }
+
+    .sub-text {
+        color: #6c757d;
+        font-size: 14px;
+    }
+
+    .side-btn {
+        width: 100%;
+        margin-bottom: 12px;
+        border-radius: 10px;
+        font-weight: 600;
+        padding: 12px;
+    }
+
+    .btn-primary {
+        background-color: #0f2f5f;
+        border: none;
+    }
+
+    .btn-outline-primary {
+        border-color: #0f2f5f;
+        color: #0f2f5f;
+    }
+
+    .table-card {
+        background: #ffffff;
+        border-radius: 14px;
+        padding: 25px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    th {
+        background-color: #0f2f5f;
+        color: white;
+    }
+</style>
+
+<div class="container-fluid mt-3">
+
+    <!-- Heading -->
+    <div class="mb-4">
+        <div class="page-title">My Bookings</div>
+        <div class="sub-text">View your hall booking requests</div>
+    </div>
+
+    <div class="row">
+
+        <!-- Left Buttons -->
+        <div class="col-md-3">
+            <a href="/User/HallBooking" class="btn btn-outline-primary side-btn">Booking Form</a>
+            <a href="#" class="btn btn-primary side-btn">My Bookings</a>
+        </div>
+
+        <!-- Table Section -->
+        <div class="col-md-9">
+            <div class="table-card">
+
+                <h5 class="fw-bold mb-3">Booking List</h5>
+
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Hall</th>
+                            <th>Date</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Purpose</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Count > 0)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.HallType</td>
+                                    <td>@item.Date.ToString("dd-MM-yyyy")</td>
+                                    <td>@item.StartTime</td>
+                                    <td>@item.EndTime</td>
+                                    <td>@item.Purpose</td>
+                                    <td>
+                                        <span class="badge bg-warning text-dark">
+                                            Pending
+                                        </span>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="6" class="text-center">No bookings found</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
