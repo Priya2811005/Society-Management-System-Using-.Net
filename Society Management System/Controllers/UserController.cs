@@ -60,6 +60,30 @@ namespace Society_Management_System.Controllers
         }
 
 
+        // ---------------- HallBooking----------------
+
+        public ActionResult HallBooking()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SaveHallBooking(string HallType, DateTime Date, string StartTime, string EndTime, string Purpose)
+        {
+            // Save to database here
+
+            ViewBag.Message = "Booking Submitted Successfully!";
+            return RedirectToAction("MyBookings");
+        }
+
+
+        // ---------------- MyBookings----------------
+
+        public IActionResult MyBookings()
+        {
+            return View();
+        }
+
 
 
 
