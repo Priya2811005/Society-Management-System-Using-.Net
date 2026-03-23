@@ -1,0 +1,137 @@
+﻿@{
+    ViewBag.Title = "Hall Booking";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+<style>
+    body {
+        background-color: #f4f7fb;
+    }
+
+    .page-title {
+        font-weight: 700;
+        font-size: 26px;
+        color: #0f2f5f;
+    }
+
+    .sub-text {
+        color: #6c757d;
+        font-size: 14px;
+    }
+
+    .side-btn {
+        width: 100%;
+        margin-bottom: 12px;
+        border-radius: 10px;
+        font-weight: 600;
+        padding: 12px;
+    }
+
+    .btn-primary {
+        background-color: #0f2f5f;
+        border: none;
+    }
+
+    .btn-outline-primary {
+        border-color: #0f2f5f;
+        color: #0f2f5f;
+    }
+
+    .form-card {
+        background: #ffffff;
+        border-radius: 14px;
+        padding: 30px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    }
+
+    .form-control {
+        border-radius: 8px;
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    label {
+        font-weight: 500;
+    }
+
+    .submit-btn {
+        background-color: #0f2f5f;
+        color: white;
+        border-radius: 8px;
+        padding: 10px 25px;
+    }
+</style>
+
+<div class="container-fluid mt-3">
+
+    <!-- Heading -->
+    <div class="mb-4">
+        <div class="page-title">Community Hall Booking</div>
+        <div class="sub-text">Easily manage and book halls for your events</div>
+    </div>
+
+    <div class="row">
+
+        <!-- Left Buttons -->
+        <div class="col-md-3">
+            <a href="#" class="btn btn-primary side-btn">Booking Form</a>
+            <a href="/User/MyBookings" class="btn btn-outline-primary side-btn">My Bookings</a>
+        </div>
+
+        <!-- Form Section -->
+        <div class="col-md-7">
+            <div class="form-card">
+
+                <h4 class="fw-bold mb-4">Hall Booking Form</h4>
+
+                <form method="post" action="/User/SaveHallBooking">
+
+                    <!-- Hall Type -->
+                    <div class="mb-3">
+                        <label>Hall Type</label>
+                        <select class="form-control" name="HallType">
+                            <option>Hall A (Capacity: 50)</option>
+                            <option>Hall B (Capacity: 100)</option>
+                            <option>Hall C (Capacity: 200)</option>
+                        </select>
+                    </div>
+
+                    <!-- Date -->
+                    <div class="mb-3">
+                        <label>Date</label>
+                        <input type="date" name="Date" class="form-control" />
+                    </div>
+
+                    <!-- Time Row -->
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label>Start Time</label>
+                            <input type="time" name="StartTime" class="form-control" />
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>End Time</label>
+                            <input type="time" name="EndTime" class="form-control" />
+                        </div>
+                    </div>
+
+                    <!-- Purpose -->
+                    <div class="mb-3">
+                        <label>Purpose</label>
+                        <textarea name="Purpose" class="form-control" rows="3"
+                                  placeholder="Enter purpose here"></textarea>
+                    </div>
+
+                    <!-- Submit -->
+                    <div class="text-center mt-4">
+                        <button type="submit" class="submit-btn">Submit Request</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
