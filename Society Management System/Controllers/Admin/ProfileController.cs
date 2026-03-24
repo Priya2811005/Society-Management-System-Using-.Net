@@ -11,7 +11,11 @@ namespace Society_Management_System.Controllers.Admin
         }
         public IActionResult Logout()
         {
-            return RedirectToAction("Index", "Login");
+            // Clear session (optional but recommended)
+            HttpContext.Session.Clear();
+
+            // Redirect to Account/Login (outside Admin)
+            return RedirectToAction("Login", "Account", new { area = "" });
         }
     }
 }
