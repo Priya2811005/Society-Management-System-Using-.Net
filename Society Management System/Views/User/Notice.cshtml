@@ -1,6 +1,146 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿
 @{
+    ViewBag.Title = "Notice Board";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
 }
-<h1>Notice</h1>
+
+<style>
+    body {
+        background-color: #f4f7fb;
+    }
+
+    .page-title {
+        font-weight: 700;
+        font-size: 24px;
+        color: #0f2f5f;
+    }
+
+    .sub-text {
+        color: #6c757d;
+        font-size: 14px;
+    }
+
+    /* Sidebar Buttons */
+    .side-btn {
+        width: 100%;
+        margin-bottom: 12px;
+        border-radius: 8px;
+        font-weight: 600;
+        padding: 10px;
+    }
+
+    .btn-primary {
+        background-color: #0f2f5f;
+        border: none;
+        color: white;
+    }
+
+        .btn-primary:hover {
+            background-color: #1b3f7a;
+        }
+
+    .btn-light {
+        background-color: #e9ecef;
+        border: 1px solid #ccc;
+    }
+
+    /* Table Card */
+    .table-card {
+        background: #ffffff;
+        border-radius: 10px;
+        padding: 15px;
+        border: 1px solid #d6e0f0;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th {
+        background-color: #f4b400;
+        color: black;
+        padding: 10px;
+        text-align: center;
+        font-weight: 600;
+        border: 1px solid #ccc;
+    }
+
+    td {
+        padding: 10px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+    }
+
+    .view-link {
+        color: #0f2f5f;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+        .view-link:hover {
+            text-decoration: underline;
+        }
+</style>
+
+<div class="container-fluid mt-3">
+
+    <!-- Heading -->
+    <div class="mb-4">
+        <div class="page-title">My Notice Board</div>
+        <div class="sub-text">Submit and manage your visitor requests.</div>
+    </div>
+
+    <div class="row">
+
+        <!-- Left Buttons -->
+        <div class="col-md-2">
+            @* <a href="/User/AddNotice" class="btn btn-light side-btn">Add Notice</a> *@
+            <a href="/User/Notice" class="btn btn-primary side-btn">Visitor Notice</a>
+        </div>
+
+        <!-- Table Section -->
+        <div class="col-md-10">
+            <div class="table-card">
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>View More</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Date.ToString("dd/MM/yyyy")</td>
+                                    <td>@item.Title</td>
+                                    <td>@item.Description</td>
+                                    <td>
+                                        <a href="/User/NoticeDetails/@item.Id" class="view-link">View</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="4" style="text-align:center;">No notices available</td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

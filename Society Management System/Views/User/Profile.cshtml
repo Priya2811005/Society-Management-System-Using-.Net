@@ -1,0 +1,122 @@
+﻿@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+
+    // Dummy data (you can replace with Session later)
+    var name = ViewBag.Name ?? "Trushali Sorathiya";
+    var email = ViewBag.Email ?? "trushali@gmail.com";
+    var contact = ViewBag.Contact ?? "9876543210";
+    var flat = ViewBag.Flat ?? "101";
+    var wing = ViewBag.Wing ?? "A";
+}
+
+<style>
+    body {
+        background-color: #f4f7fb;
+    }
+
+    .page-title {
+        font-weight: 700;
+        font-size: 24px;
+        color: #0f2f5f;
+    }
+
+    .sub-text {
+        color: #6c757d;
+        font-size: 14px;
+    }
+
+    .side-btn {
+        width: 100%;
+        margin-bottom: 12px;
+        border-radius: 8px;
+        font-weight: 600;
+        padding: 10px;
+    }
+
+    .btn-primary {
+        background-color: #0f2f5f;
+        border: none;
+    }
+
+    .btn-outline-primary {
+        border-color: #0f2f5f;
+        color: #0f2f5f;
+    }
+
+    .profile-card {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .form-control {
+        border-radius: 8px;
+        font-size: 14px;
+    }
+</style>
+
+<div class="container-fluid mt-3">
+
+    <!-- Heading -->
+    <div class="mb-4">
+        <div class="page-title">My Profile</div>
+        <div class="sub-text">View and update your profile details.</div>
+    </div>
+
+    <div class="row">
+
+        <!-- Left Menu -->
+        <div class="col-md-2">
+            <a href="/User/Profile" class="btn btn-primary side-btn">My Profile</a>
+            <a href="/Account/Login" class="btn btn-outline-primary side-btn">Logout</a>
+        </div>
+
+        <!-- Profile Form -->
+        <div class="col-md-6">
+            <div class="profile-card">
+
+                <h5 class="mb-3 fw-bold">Profile Details</h5>
+
+                <form method="post">
+
+                    <div class="mb-3">
+                        <label>Name</label>
+                        <input type="text" name="Name" value="@name" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Email</label>
+                        <input type="email" name="Email" value="@email" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Contact Number</label>
+                        <input type="text" name="Contact" value="@contact" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Flat Number</label>
+                        <input type="text" name="Flat" value="@flat" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Wing</label>
+                        <input type="text" name="Wing" value="@wing" class="form-control" />
+                    </div>
+
+                    <div class="text-center mt-3">
+                        <button type="submit" class="btn btn-primary px-4">
+                            Update Profile
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

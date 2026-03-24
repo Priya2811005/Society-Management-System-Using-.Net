@@ -9,5 +9,9 @@ namespace Society_Management_System.Controllers.Admin
         {
             return View("~/Views/Admin/Profile/Index.cshtml");
         }
+        public IActionResult Logout()
+        {
+            return RedirectToAction("Index", "Login");
+        }
     }
 }

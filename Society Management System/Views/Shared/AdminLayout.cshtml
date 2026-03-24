@@ -14,6 +14,7 @@
 <body>
 
     <!-- Sidebar -->
+
     <div class="sidebar">
 
         <h2>T2P</h2>
@@ -21,37 +22,37 @@
         <ul>
 
             <li>
-                <a class="active" asp-controller="Dashboard" asp-action="Index">
+                <a href="@Url.Action("Index", "Dashboard", new { area = "Admin" })">
                     <i class="fa-solid fa-chart-line"></i> Dashboard
                 </a>
             </li>
 
             <li>
-                <a asp-controller="Member" asp-action="Index">
+                <a href="@Url.Action("Index", "Member", new { area = "Admin" })">
                     <i class="fa-solid fa-users"></i> Add Member
                 </a>
             </li>
 
             <li>
-                <a asp-controller="Maintenance" asp-action="Index">
+                <a href="@Url.Action("Index", "Maintenance", new { area = "Admin" })">
                     <i class="fa-solid fa-money-bill"></i> Maintenance
                 </a>
             </li>
 
             <li>
-                <a asp-controller="Complaint" asp-action="Index">
+                <a href="@Url.Action("Index", "Complaint", new { area = "Admin" })">
                     <i class="fa-solid fa-triangle-exclamation"></i> Complaint
                 </a>
             </li>
 
             <li>
-                <a asp-controller="Notice" asp-action="Index">
+                <a href="@Url.Action("Index", "Notice", new { area = "Admin" })">
                     <i class="fa-solid fa-bullhorn"></i> Notice
                 </a>
             </li>
 
             <li>
-                <a asp-controller="Visitor" asp-action="Index">
+                <a href="@Url.Action("Index", "Visitor", new { area = "Admin" })">
                     <i class="fa-solid fa-user-check"></i> Visitor Management
                 </a>
             </li>
@@ -69,17 +70,17 @@
             <div class="profile-menu">
 
                 <button class="profile-btn" onclick="toggleMenu()">
-                    <i class="fa-solid fa-user"></i> 
+                    <i class="fa-solid fa-user"></i>
                     <i class="fa-solid fa-caret-down"></i>
                 </button>
 
                 <div class="dropdown-menu" id="profileDropdown">
 
-                    <a asp-controller="Account" asp-action="Profile">
+                    <a href="@Url.Action("Index", "Profile", new { area = "Admin" })">
                         <i class="fa-solid fa-id-card"></i> My Profile
                     </a>
 
-                    <a asp-controller="Account" asp-action="Logout">
+                    <a href="@Url.Action("Logout", "Profile", new { area = "Admin" })">
                         <i class="fa-solid fa-right-from-bracket"></i> Logout
                     </a>
 
