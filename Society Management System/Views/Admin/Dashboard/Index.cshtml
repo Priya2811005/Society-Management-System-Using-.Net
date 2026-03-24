@@ -8,6 +8,7 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 } *@
 
+
 <h2 class="dashboard-title">My Dashboard</h2>
 
 <div class="dashboard-container">
@@ -31,3 +32,13 @@
     </div>
 
 </div>
+<!-- Highlight Complaint menu -->
+<script>
+    document.querySelectorAll('.sidebar ul li a').forEach(function (item) {
+        item.classList.remove('active');
+
+        if (item.textContent.includes("Dashboard")) {
+            item.classList.add('active');
+        }
+    });
+</script>

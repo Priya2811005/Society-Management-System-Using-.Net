@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="profile-container">
+
+    <h3>My Profile</h3>
+    <p class="sub-text">Manage your personal details and account settings.</p>
+
+    <div class="profile-form">
+
+        
+        <div class="form-row">
+            <label>Full Name :</label>
+            <input type="text" value="Admin"/>
+        </div>
+
+        <div class="form-row">
+            <label>Email :</label>
+            <input type="email" value="admin@gmail.com" />
+        </div>
+
+        <div class="form-row">
+            <label>Phone :</label>
+            <input type="text" value="9876543210" />
+        </div>
+
+        <div class="form-row">
+            <label>Role :</label>
+            <input type="text" value="Administrator" disabled />
+        </div>
+
+        <div class="form-row">
+            <label>Date of Birth :</label>
+            <input type="date" />
+        </div>
+
+        <div class="form-row">
+            <label>Gender :</label>
+            <select>
+                <option>Male</option>
+                <option>Female</option>
+            </select>
+        </div>
+
+        <div class="form-row">
+            <label>Password :</label>
+            <input type="password" placeholder="Enter new password" />
+        </div>
+
+        <div class="form-row button-row">
+            <button class="submit-btn">Update Profile</button>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Highlight Profile menu -->
+<script>
+    document.querySelectorAll('.sidebar ul li a').forEach(function (item) {
+        item.classList.remove('active');
+
+        if (item.textContent.includes("Profile")) {
+            item.classList.add('active');
+        }
+    });
+</script>
