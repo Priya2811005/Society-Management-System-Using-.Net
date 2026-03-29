@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Society_Management_System.Models;   
 using System;
-using System.Collections.Generic;
 
 namespace Society_Management_System.Controllers
 {
     public class UserController : Controller
     {
+        // ---------------- Dashboard ----------------
         public IActionResult Dashboard()
         {
             return View();
@@ -14,101 +13,99 @@ namespace Society_Management_System.Controllers
 
         // ---------------- Complaint ----------------
 
+        // GET: Add Complaint
+        [HttpGet]
         public IActionResult AddComplain()
         {
             return View();
         }
 
+        // POST: Add Complaint
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult AddComplain(string subject, string description)
         {
-            ViewBag.Message = "Complaint Submitted Successfully!";
-            return View();
+            if (string.IsNullOrEmpty(subject) || string.IsNullOrEmpty(description))
+            {
+                ViewBag.Message = "Please fill all fields!";
+                return View();
+            }
+
+            // TODO: Save complaint to database
+
+            TempData["SuccessMessage"] = "Complaint submitted successfully!";
+            return RedirectToAction(nameof(ComplaintList));
         }
 
+        // Complaint List
         public IActionResult ComplaintList()
         {
             return View();
         }
 
         // ---------------- Notice ----------------
-
         public IActionResult Notice()
         {
-            
             return View();
         }
 
+        // ---------------- Visitor ----------------
 
-        // ---------------- AddVisitor ----------------
-
+        // Add Visitor
         public IActionResult AddVisitor()
         {
-
             return View();
         }
 
-
-
-
-        // ---------------- VisitorList----------------
-
+        // Visitor List
         public IActionResult VisitorList()
         {
-
             return View();
         }
 
+        // ---------------- Hall Booking ----------------
 
-        // ---------------- HallBooking----------------
-
-        public ActionResult HallBooking()
+        // GET: Hall Booking
+        [HttpGet]
+        public IActionResult HallBooking()
         {
             return View();
         }
 
+        // POST: Save Hall Booking
         [HttpPost]
-        public ActionResult SaveHallBooking(string HallType, DateTime Date, string StartTime, string EndTime, string Purpose)
+        [ValidateAntiForgeryToken]
+        public IActionResult SaveHallBooking(string hallType, DateTime date, string startTime, string endTime, string purpose)
         {
-            // Save to database here
+            if (string.IsNullOrEmpty(hallType) || string.IsNullOrEmpty(purpose))
+            {
+                TempData["ErrorMessage"] = "Please fill all required fields!";
+                return RedirectToAction(nameof(HallBooking));
+            }
 
-            ViewBag.Message = "Booking Submitted Successfully!";
-            return RedirectToAction("MyBookings");
+            // TODO: Save booking to database
+
+            TempData["SuccessMessage"] = "Booking submitted successfully!";
+            return RedirectToAction(nameof(MyBookings));
         }
 
-
-        // ---------------- MyBookings----------------
-
+        // My Bookings
         public IActionResult MyBookings()
         {
             return View();
         }
 
-
-
-
-
-
-
-
-
-
-        // ---------------- Profile----------------
-
-
+        // ---------------- Profile ----------------
         public IActionResult Profile()
         {
-            ViewBag.Name = "Trushali";
-            ViewBag.Email = "test@gmail.com";
+            // Temporary user data (replace with DB/session later)
+            ViewBag.Name = "Trushali Sorathiya";
+            ViewBag.Email = "trushali@gmail.com";
             ViewBag.Contact = "9876543210";
             ViewBag.Flat = "101";
             ViewBag.Wing = "A";
 
             return View();
         }
-
-
-
     }
-
 }
