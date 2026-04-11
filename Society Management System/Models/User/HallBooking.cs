@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Society_Management_System.Models
@@ -6,8 +5,8 @@ namespace Society_Management_System.Models
     public class HallBooking
     {
         public int Id { get; set; }
+
         [Required]
-        [StringLength(50)]
         public string HallType { get; set; }
 
         [Required]
@@ -20,7 +19,11 @@ namespace Society_Management_System.Models
         public string EndTime { get; set; }
 
         [Required]
-        [StringLength(255)]
         public string Purpose { get; set; }
+
+        public string Status { get; set; } = "Pending";
+
+        public int UserId { get; set; }
+        public User User { get; set; }
     }
 }
