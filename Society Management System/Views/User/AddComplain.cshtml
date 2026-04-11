@@ -1,178 +1,31 @@
-@{
-    ViewBag.Title = "Complaint";
-    Layout = "~/Views/Shared/UserLayout.cshtml";
-}
+@model Society_Management_System.Models.Complaint
 
-<style>
-    body {
-        background-color: #f4f7fb;
-    }
+<form asp-action="AddComplaint" method="post" enctype="multipart/form-data">
 
-    .page-title {
-        font-weight: 700;
-        font-size: 24px;
-        color: #0f2f5f;
-    }
-
-    .sub-text {
-        color: #6c757d;
-        font-size: 14px;
-    }
-
-    /* Sidebar Buttons */
-    .side-btn {
-        width: 100%;
-        margin-bottom: 12px;
-        border-radius: 8px;
-        font-weight: 600;
-        padding: 10px;
-    }
-
-    .btn-primary {
-        background-color: #0f2f5f;
-        border: none;
-    }
-
-        .btn-primary:hover {
-            background-color: #1b3f7a;
-        }
-
-    .btn-outline-primary {
-        border-color: #0f2f5f;
-        color: #0f2f5f;
-    }
-
-        .btn-outline-primary:hover {
-            background-color: #0f2f5f;
-            color: white;
-        }
-
-    /* Form Card */
-    .form-card {
-        border: 1px solid #d6e0f0;
-        border-radius: 12px;
-        padding: 25px;
-        background: #ffffff;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    }
-
-        .form-card h5 {
-            color: #0f2f5f;
-        }
-
-    .form-label {
-        font-weight: 600;
-        color: #333;
-    }
-
-    .form-control {
-        border-radius: 6px;
-        border: 1px solid #ced4da;
-        padding: 8px;
-    }
-
-        .form-control:focus {
-            border-color: #0f2f5f;
-            box-shadow: 0 0 5px rgba(15,47,95,0.2);
-        }
-
-    /* Image Preview */
-    .preview-img {
-        width: 220px;
-        height: 140px;
-        object-fit: cover;
-        border-radius: 8px;
-        margin-top: 10px;
-        border: 1px solid #ddd;
-    }
-
-    /* Submit Button */
-    .submit-btn {
-        background-color: #0f2f5f;
-        color: white;
-        border-radius: 8px;
-        padding: 10px 25px;
-        border: none;
-        font-weight: 600;
-        transition: 0.3s;
-    }
-
-        .submit-btn:hover {
-            background-color: #1b3f7a;
-        }
-</style>
-
-<div class="container-fluid mt-3">
-
-    <!-- Heading -->
-    <div class="mb-4">
-        <div class="page-title">Complaint Management</div>
-        <div class="sub-text">Submit and manage your visitor requests.</div>
+    <!-- Subject -->
+    <div class="mb-3">
+        <label class="form-label">Subject</label>
+        <input asp-for="Subject" class="form-control" />
+        <span asp-validation-for="Subject" class="text-danger"></span>
     </div>
 
-    <div class="row">
-
-        <!-- Left Buttons -->
-        <div class="col-md-2">
-            <a href="/User/AddComplaint" class="btn btn-primary side-btn">Complaint Form</a>
-        </div>
-
-        <!-- Form Section -->
-        <div class="col-md-6">
-            <div class="form-card">
-
-                <h5 class="mb-3 fw-bold">Add Complaint</h5>
-
-                <form method="post" enctype="multipart/form-data">
-
-                    <!-- Complaint Date -->
-                    <div class="mb-3">
-                        <label class="form-label">Complaint Date</label>
-                        <input type="date" name="ComplaintDate" class="form-control" required />
-                    </div>
-
-                    <!-- Description -->
-                    <div class="mb-3">
-                        <label class="form-label">Description</label>
-                        <textarea name="Description" class="form-control" rows="3"
-                                  placeholder="Type Description Here" required></textarea>
-                    </div>
-
-                    <!-- Upload Image -->
-                    <div class="mb-3">
-                        <label class="form-label">Upload Image</label>
-                        <input type="file" name="ImageFile" class="form-control"
-                               accept="image/*" onchange="previewImage(event)" />
-
-                        <!-- Preview -->
-                        <img id="preview"
-                             src="https://via.placeholder.com/220x140?text=Preview"
-                             class="preview-img" />
-                    </div>
-
-                    <!-- Submit -->
-                    <div class="text-center mt-4">
-                        <button type="submit" class="submit-btn">Submit Request</button>
-                    </div>
-
-                </form>
-
-            </div>
-        </div>
-
+    <!-- Description -->
+    <div class="mb-3">
+        <label class="form-label">Description</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
     </div>
 
-</div>
+    <!-- Date -->
+    <div class="mb-3">
+        <label class="form-label">Complaint Date</label>
+        <input asp-for="ComplaintDate" type="date" class="form-control" />
+    </div>
 
-<!-- Image Preview Script -->
-<script>
-    function previewImage(event) {
-        const reader = new FileReader();
-        reader.onload = function () {
-            document.getElementById('preview').src = reader.result;
-        }
-        if (event.target.files.length > 0) {
-            reader.readAsDataURL(event.target.files[0]);
-        }
-    }
-</script>
+    <!-- Image -->
+    <div class="mb-3">
+        <input type="file" name="ImageFile" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+</form>
