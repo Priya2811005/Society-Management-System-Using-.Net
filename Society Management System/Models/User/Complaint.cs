@@ -19,7 +19,5 @@ namespace Society_Management_System.Models
         public string Status { get; set; } = "Pending";
 
         public int UserId { get; set; }
-
-        public User? User { get; set; }
     }
 }
