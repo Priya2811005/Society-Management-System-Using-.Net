@@ -1,76 +1,5 @@
-﻿//using Microsoft.AspNetCore.Mvc;
-//using Society_Management_System.Data;
-//using Society_Management_System.Models;
-
-//namespace Society_Management_System.Controllers
-//{
-//    public class UserController : Controller
-//    {
-//        private readonly ApplicationDbContext _context;
-
-//        public UserController(ApplicationDbContext context)
-//        {
-//            _context = context;
-//        }
-
-//        public IActionResult Dashboard()
-//        {
-//            return View();
-//        }
-
-//        // Complaint
-//        [HttpGet]
-//        public IActionResult AddComplaint()
-//        {
-//            return View();
-//        }
-
-//        [HttpPost]
-//        public IActionResult AddComplaint(Complaint model)
-//        {
-//            if (ModelState.IsValid)
-//            {
-//                _context.Complaints.Add(model);
-//                _context.SaveChanges();
-//                return RedirectToAction("Dashboard");
-//            }
-//            return View(model);
-//        }
-
-//        public IActionResult Notice()
-//        {
-//            return View();
-//        }
-
-//        public IActionResult Maintenance()
-//        {
-//            return View();
-//        }
-
-//        public IActionResult AddVisitor()
-//        {
-//            return View();
-//        }
-
-//        public IActionResult HallBooking()
-//        {
-//            return View();
-//        }
-
-//        public IActionResult Profile()
-//        {
-//            ViewBag.Name = "Trushali Sorathiya";
-//            ViewBag.Email = "trushali@gmail.com";
-//            ViewBag.Contact = "9876543210";
-//            ViewBag.Flat = "101";
-//            ViewBag.Wing = "A";
-
-//            return View();
-//        }
-//    }
-//}
-
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Society_Management_System.Data;
 using Society_Management_System.Models;
 
@@ -81,6 +10,7 @@ namespace Society_Management_System.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _env;
 
+        // Single constructor with both dependencies
         public UserController(ApplicationDbContext context, IWebHostEnvironment env)
         {
             _context = context;
@@ -92,15 +22,16 @@ namespace Society_Management_System.Controllers
             return View();
         }
 
-        // GET
+        // GET: User/AddComplaint
         public IActionResult AddComplaint()
         {
             return View();
         }
 
-        // POST
         [HttpPost]
-        public IActionResult AddComplaint(Complaint model, IFormFile ImageFile)
+        [ValidateAntiForgeryToken]
+
+        public async Task<IActionResult> AddComplaint(Complaint model, IFormFile? ImageFile)
         {
             if (ModelState.IsValid)
             {
@@ -109,17 +40,17 @@ namespace Society_Management_System.Controllers
                     // Image Upload
                     if (ImageFile != null && ImageFile.Length > 0)
                     {
-                        string folder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads");
+                        string folder = Path.Combine(_env.WebRootPath, "uploads");
 
                         if (!Directory.Exists(folder))
                             Directory.CreateDirectory(folder);
 
-                        string fileName = Guid.NewGuid().ToString() + Path.GetExtension(ImageFile.FileName);
+                        string fileName = Guid.NewGuid() + "_" + ImageFile.FileName;
                         string path = Path.Combine(folder, fileName);
 
                         using (var stream = new FileStream(path, FileMode.Create))
                         {
-                            ImageFile.CopyTo(stream);
+                            await ImageFile.CopyToAsync(stream);
                         }
 
                         model.ImagePath = "/uploads/" + fileName;
@@ -129,26 +60,108 @@ namespace Society_Management_System.Controllers
                     model.UserId = 1;
 
                     _context.Complaints.Add(model);
-                    int result = _context.SaveChanges();
+                    await _context.SaveChangesAsync();
 
-                    // DEBUG
-                    Console.WriteLine("Saved Rows: " + result);
-
-                    TempData["Success"] = "Complaint saved successfully";
-
+                    TempData["Success"] = "Saved Successfully";
                     return RedirectToAction("AddComplaint");
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("ERROR: " + ex.Message);
+                    TempData["Error"] = ex.Message;
+                    TempData["Success"] = "Complaint submitted successfully!";
                 }
-            }
-            else
-            {
-                Console.WriteLine("ModelState Invalid");
             }
 
             return View(model);
+        }
+
+
+        public IActionResult Notice()
+        {
+            return View();
+        }
+
+        public IActionResult Maintenance()
+        {
+            return View();
+        }
+
+
+        // GET PAGE
+        public IActionResult AddVisitor()
+        {
+            return View();
+        }
+
+        // POST METHOD
+        [HttpPost]
+        public IActionResult AddVisitor(Visitor model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    model.UserId = 1; // TEMP (replace later with session)
+                    model.RequestDate = DateTime.Now;
+
+                    _context.Visitors.Add(model);
+                    _context.SaveChanges();
+
+                    TempData["Success"] = "Visitor Request Submitted Successfully!";
+                    return RedirectToAction("Visitor");
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+            }
+
+            return View(model);
+        }
+
+        // ---------------- HALL BOOKING ----------------
+
+        // GET
+        public IActionResult HallBooking()
+        {
+            return View();
+        }
+
+        // POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SaveHallBooking(HallBooking model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    model.UserId = 1; // Replace later with logged-in user
+                    model.CreatedAt = DateTime.Now;
+
+                    _context.HallBookings.Add(model);
+                    await _context.SaveChangesAsync();
+
+                    TempData["Success"] = "Hall booked successfully!";
+                    return RedirectToAction("HallBooking");
+                }
+                catch (Exception ex)
+                {
+                    TempData["Error"] = ex.Message;
+                }
+            }
+
+            return View("HallBooking", model);
+        }
+
+        public IActionResult Profile()
+        {
+            ViewBag.Name = "Trushali Sorathiya";
+            ViewBag.Email = "trushali@gmail.com";
+            ViewBag.Contact = "9876543210";
+            ViewBag.Flat = "101";
+            ViewBag.Wing = "A";
+            return View();
         }
     }
 }
