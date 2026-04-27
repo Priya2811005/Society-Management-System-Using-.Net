@@ -113,7 +113,10 @@ namespace Society_Management_System.Controllers
             }
             catch (Exception ex)
             {
-                TempData["Error"] = ex.Message;
+                // Log the exception if you have ILogger
+                TempData["Error"] = "Database error: " + ex.InnerException?.Message ?? ex.Message;
+                // Do NOT set any success TempData
+                return View(model);
             }
 
             return View(model);
