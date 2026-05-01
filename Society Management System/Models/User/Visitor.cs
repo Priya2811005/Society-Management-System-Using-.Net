@@ -1,26 +1,24 @@
-using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Society_Management_System.Models
+public class Visitor
 {
-    public class Visitor
-    {
-        [Key]
-        public int VisitorId { get; set; }
+    [Key]
+    public int VisitorId { get; set; }
 
-        public int UserId { get; set; }
+    [NotMapped]
+    public int UserId { get; set; }
 
-        [Required]
-        public string VisitorName { get; set; }
+    [Required(ErrorMessage = "Visitor Name is required")]
+    public string VisitorName { get; set; } = string.Empty;
 
-        [Required]
-        public string Purpose { get; set; }
+    [Required(ErrorMessage = "Purpose is required")]
+    public string Purpose { get; set; } = string.Empty;
 
-        [Required]
-        public string ContactNumber { get; set; }
+    [Required(ErrorMessage = "Contact Number is required")]
+    public string ContactNumber { get; set; } = string.Empty;
 
-        public string VisitDetails { get; set; }
+    public string? VisitDetails { get; set; }
 
-        public DateTime RequestDate { get; set; } = DateTime.Now;
-    }
+    public DateTime RequestDate { get; set; } = DateTime.Now;
 }
