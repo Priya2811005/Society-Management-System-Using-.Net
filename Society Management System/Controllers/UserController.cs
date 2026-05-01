@@ -86,7 +86,6 @@ namespace Society_Management_System.Controllers
             return View();
         }
 
-
         // GET PAGE
         public IActionResult AddVisitor()
         {
@@ -95,31 +94,39 @@ namespace Society_Management_System.Controllers
 
         // POST METHOD
         [HttpPost]
-        public IActionResult AddVisitor(Visitor model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddVisitor(Visitor model)
         {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    model.UserId = 1; // TEMP (replace later with session)
-                    model.RequestDate = DateTime.Now;
+            // 🔥 REMOVE unwanted validation
+            ModelState.Remove("UserId");
 
-                    _context.Visitors.Add(model);
-                    _context.SaveChanges();
-
-                    TempData["Success"] = "Visitor Request Submitted Successfully!";
-                    return RedirectToAction("Visitor");
-                }
-            }
-            catch (Exception ex)
+            if (!ModelState.IsValid)
             {
-                // Log the exception if you have ILogger
-                TempData["Error"] = "Database error: " + ex.InnerException?.Message ?? ex.Message;
-                // Do NOT set any success TempData
+                var errors = ModelState.Values
+                    .SelectMany(v => v.Errors)
+                    .Select(e => e.ErrorMessage)
+                    .ToList();
+
+                TempData["Error"] = string.Join(", ", errors);
                 return View(model);
             }
 
-            return View(model);
+            try
+            {
+                model.UserId = 1; // TEMP
+                model.RequestDate = DateTime.Now;
+
+                _context.Visitors.Add(model);
+                await _context.SaveChangesAsync();
+
+                TempData["Success"] = "Visitor Request Submitted Successfully!";
+                return RedirectToAction("AddVisitor");
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = "Database error: " + (ex.InnerException?.Message ?? ex.Message);
+                return View(model);
+            }
         }
 
         // ---------------- HALL BOOKING ----------------
