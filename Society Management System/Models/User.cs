@@ -4,26 +4,24 @@ namespace Society_Management_System.Models
 {
     public class User
     {
-        public int Id { get; set; }
+        [Key]
+        public int UserId { get; set; }
 
-        [Required(ErrorMessage = "Name is required")]
+        [Required]
+        [StringLength(100)]
         public string Name { get; set; }
 
-        [Required, EmailAddress]
+        [Required]
+        [EmailAddress]
+        [StringLength(150)]
         public string Email { get; set; }
 
-        [Required, MinLength(6)]
-        public string Password { get; set; }
-
-        [Required, Phone]
-        public string Contact { get; set; }
+        [Required]
+        [StringLength(100)]
+        public string Password { get; set; } // For demo purposes plain text. Use hashing in production.
 
         [Required]
-        public string Flat { get; set; }
-
-        [Required]
-        public string Wing { get; set; }
-
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        [StringLength(20)]
+        public string Role { get; set; } // "Admin" or "User"
     }
 }
