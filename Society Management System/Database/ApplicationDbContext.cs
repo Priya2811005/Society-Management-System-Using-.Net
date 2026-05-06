@@ -14,7 +14,8 @@ namespace Society_Management_System.Data
         public DbSet<Complaint> Complaints { get; set; }
         public DbSet<Maintenance> Maintenances { get; set; }
         public DbSet<Visitor> Visitors { get; set; }
-        public object HallBookings { get; internal set; }
+        public DbSet<HallBooking> HallBookings { get; set; }
+        public object Notices { get; internal set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

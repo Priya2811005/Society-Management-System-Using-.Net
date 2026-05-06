@@ -1,4 +1,6 @@
-﻿
+@using System.Linq
+@model IEnumerable<Society_Management_System.Models.Complaint>
+
 @{
     ViewBag.Title = "Complaint List";
     Layout = "~/Views/Shared/UserLayout.cshtml";
@@ -123,7 +125,7 @@
                             {
                                 <tr>
                                     <td>@i</td>
-                                    <td>@item.ComplaintDate.ToString("dd-MM-yyyy")</td>
+                                    <td>@item.CreatedDate.ToString("dd-MM-yyyy")</td>
                                     <td>@item.Description</td>
 
                                     <td>
@@ -138,8 +140,8 @@
                                     </td>
 
                                     <td>
-                                        <a href="/User/EditComplaint/@item.Id" class="btn action-btn btn-edit">Edit</a>
-                                        <a href="/User/DeleteComplaint/@item.Id"
+                                        <a href="/User/EditComplaint/@item.ComplaintId" class="btn action-btn btn-edit">Edit</a>
+                                        <a href="/User/DeleteComplaint/@item.ComplaintId"
                                            class="btn action-btn btn-delete"
                                            onclick="return confirm('Are you sure?');">
                                             Delete

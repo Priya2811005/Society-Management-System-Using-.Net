@@ -131,22 +131,43 @@ namespace Society_Management_System.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult SaveHallBooking(string hallType, DateTime date, string startTime, string endTime, string purpose)
         {
-            if (string.IsNullOrEmpty(hallType) || string.IsNullOrEmpty(purpose))
+            if (string.IsNullOrEmpty(hallType) || string.IsNullOrEmpty(purpose) || string.IsNullOrEmpty(startTime) || string.IsNullOrEmpty(endTime) || date == default)
             {
-                TempData["ErrorMessage"] = "Please fill all required fields!";
+                TempData["ErrorMessage"] = "Please fill all required fields correctly!";
                 return RedirectToAction(nameof(HallBooking));
             }
 
-            // TODO: Save booking to database
+            try
+            {
+                var booking = new HallBooking
+                {
+                    HallType = hallType,
+                    Date = date,
+                    StartTime = TimeSpan.Parse(startTime),
+                    EndTime = TimeSpan.Parse(endTime),
+                    Purpose = purpose,
+                    UserId = 1,
+                    CreatedAt = DateTime.Now
+                };
 
-            TempData["SuccessMessage"] = "Booking submitted successfully!";
-            return RedirectToAction(nameof(MyBookings));
+                _context.HallBookings.Add(booking);
+                _context.SaveChanges();
+
+                TempData["SuccessMessage"] = "Booking submitted successfully!";
+                return RedirectToAction(nameof(MyBookings));
+            }
+            catch (Exception)
+            {
+                TempData["ErrorMessage"] = "Invalid time format or server error!";
+                return RedirectToAction(nameof(HallBooking));
+            }
         }
 
         // My Bookings
         public IActionResult MyBookings()
         {
-            return View();
+            var data = _context.HallBookings.ToList();
+            return View(data);
         }
 
         // ---------------- Profile ----------------

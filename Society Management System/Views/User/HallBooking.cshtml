@@ -1,4 +1,4 @@
-﻿@{
+@{
     ViewBag.Title = "Hall Booking";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
@@ -85,11 +85,12 @@
                 <h4 class="fw-bold mb-4">Hall Booking Form</h4>
 
                 <form method="post" action="/User/SaveHallBooking">
+                    @Html.AntiForgeryToken()
 
                     <!-- Hall Type -->
                     <div class="mb-3">
                         <label>Hall Type</label>
-                        <select class="form-control" name="HallType">
+                        <select class="form-control" name="hallType">
                             <option>Hall A (Capacity: 50)</option>
                             <option>Hall B (Capacity: 100)</option>
                             <option>Hall C (Capacity: 200)</option>
@@ -99,26 +100,26 @@
                     <!-- Date -->
                     <div class="mb-3">
                         <label>Date</label>
-                        <input type="date" name="Date" class="form-control" />
+                        <input type="date" name="date" class="form-control" />
                     </div>
 
                     <!-- Time Row -->
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label>Start Time</label>
-                            <input type="time" name="StartTime" class="form-control" />
+                             <input type="time" name="startTime" class="form-control" />
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label>End Time</label>
-                            <input type="time" name="EndTime" class="form-control" />
+                             <input type="time" name="endTime" class="form-control" />
                         </div>
                     </div>
 
                     <!-- Purpose -->
                     <div class="mb-3">
                         <label>Purpose</label>
-                        <textarea name="Purpose" class="form-control" rows="3"
+                        <textarea name="purpose" class="form-control" rows="3"
                                   placeholder="Enter purpose here"></textarea>
                     </div>
 
