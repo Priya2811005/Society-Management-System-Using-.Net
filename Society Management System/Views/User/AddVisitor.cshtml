@@ -1,4 +1,4 @@
-﻿@{
+@{
     ViewBag.Title = "Visitor Management";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
@@ -76,25 +76,26 @@
 
                 <h5 class="mb-3 fw-bold">Add Visitor Request</h5>
 
-                <form>
+                <form method="post" action="/User/AddVisitor">
+                    @Html.AntiForgeryToken()
                     <div class="mb-3">
                         <label>Visitor Name</label>
-                        <input type="text" class="form-control" placeholder="Enter Visitor Name" />
+                        <input type="text" name="VisitorName" class="form-control" placeholder="Enter Visitor Name" required />
                     </div>
 
                     <div class="mb-3">
                         <label>Purpose</label>
-                        <input type="text" class="form-control" placeholder="Enter Purpose of Visit" />
+                        <input type="text" name="Purpose" class="form-control" placeholder="Enter Purpose of Visit" required />
                     </div>
 
                     <div class="mb-3">
                         <label>Contact Number</label>
-                        <input type="text" class="form-control" placeholder="Enter Contact Number" />
+                        <input type="text" name="ContactNumber" class="form-control" placeholder="Enter Contact Number" required />
                     </div>
 
                     <div class="mb-3">
                         <label>Details for Visit</label>
-                        <textarea class="form-control" rows="3"></textarea>
+                        <textarea name="VisitDetails" class="form-control" rows="3" required></textarea>
                     </div>
 
                     <div class="text-center mt-3">

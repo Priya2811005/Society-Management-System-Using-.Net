@@ -1,4 +1,6 @@
 @model IEnumerable<Society_Management_System.Models.Visitor>
+@using System.Linq
+
 @{
     ViewData["Title"] = "Visitor Records";
 }
@@ -18,10 +20,10 @@
         @foreach (var v in Model)
         {
             <tr>
-                <td>@v.Name</td>
+                <td>@v.VisitorName</td>
                 <td>@v.Purpose</td>
-                <td>@v.VisitDate.ToString("g")</td>
-                <td>@v.User.Name</td>
+                <td>@v.RequestDate.ToString("dd-MM-yyyy")</td>
+                <td>@(v.User != null ? v.User.Name : "N/A")</td>
             </tr>
         }
     </tbody>

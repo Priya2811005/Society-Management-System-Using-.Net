@@ -11,14 +11,23 @@ namespace Society_Management_System.Models
 
         [Required]
         [StringLength(100)]
-        public string Name { get; set; }
-
-        [Required]
-        public DateTime VisitDate { get; set; } = DateTime.Now;
+        [Column("Name")]
+        public string VisitorName { get; set; }
 
         [Required]
         [StringLength(200)]
         public string Purpose { get; set; }
+
+        [Required]
+        [StringLength(15)]
+        public string ContactNumber { get; set; }
+
+        [Required]
+        public string VisitDetails { get; set; }
+
+        [Required]
+        [Column("VisitDate")]
+        public DateTime RequestDate { get; set; } = DateTime.Now;
 
         [Required]
         public int UserId { get; set; }

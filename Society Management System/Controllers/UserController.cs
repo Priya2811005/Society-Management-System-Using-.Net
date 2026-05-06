@@ -1,13 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
-using Society_Management_System.Models;
 using Society_Management_System.Data;
+using Society_Management_System.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System;
-
 
 namespace Society_Management_System.Controllers
 {
@@ -56,14 +55,15 @@ namespace Society_Management_System.Controllers
                 CreatedDate = DateTime.Now
             };
 
-            if (imageFile != null)
+            if (imageFile != null && imageFile.Length > 0)
             {
-                string folder = Path.Combine(_environment.WebRootPath, "complaints");
+                string folder = Path.Combine(_environment.WebRootPath ?? string.Empty, "complaints");
 
                 if (!Directory.Exists(folder))
                     Directory.CreateDirectory(folder);
 
-                string fileName = Guid.NewGuid() + "_" + imageFile.FileName;
+                string safeFileName = Path.GetFileName(imageFile.FileName);
+                string fileName = Guid.NewGuid() + "_" + safeFileName;
                 string path = Path.Combine(folder, fileName);
 
                 using (var stream = new FileStream(path, FileMode.Create))
@@ -111,59 +111,82 @@ namespace Society_Management_System.Controllers
             return View();
         }
 
-        // Visitor List
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddVisitor(string VisitorName, string Purpose, string ContactNumber, string VisitDetails)
+        {
+            if (string.IsNullOrEmpty(VisitorName) || string.IsNullOrEmpty(Purpose) || string.IsNullOrEmpty(ContactNumber) || string.IsNullOrEmpty(VisitDetails))
+            {
+                ViewBag.Message = "All fields are required!";
+                return View();
+            }
+
+            var visitor = new Visitor
+            {
+                VisitorName = VisitorName,
+                Purpose = Purpose,
+                ContactNumber = ContactNumber,
+                VisitDetails = VisitDetails,
+                UserId = 1,
+                RequestDate = DateTime.Now
+            };
+
+            _context.Visitors.Add(visitor);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("VisitorList");
+        }
+
         public IActionResult VisitorList()
         {
-            return View();
+            var data = _context.Visitors.ToList();
+            return View(data);
+        }
+
+        public async Task<IActionResult> DeleteVisitor(int id)
+        {
+            var visitor = await _context.Visitors.FindAsync(id);
+            if (visitor != null)
+            {
+                _context.Visitors.Remove(visitor);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("VisitorList");
         }
 
         // ---------------- Hall Booking ----------------
-
-        // GET: Hall Booking
-        [HttpGet]
         public IActionResult HallBooking()
         {
             return View();
         }
 
-        // POST: Save Hall Booking
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult SaveHallBooking(string hallType, DateTime date, string startTime, string endTime, string purpose)
+        public async Task<IActionResult> SaveHallBooking(string hallType, DateTime date, TimeSpan startTime, TimeSpan endTime, string purpose)
         {
-            if (string.IsNullOrEmpty(hallType) || string.IsNullOrEmpty(purpose) || string.IsNullOrEmpty(startTime) || string.IsNullOrEmpty(endTime) || date == default)
+            if (string.IsNullOrEmpty(hallType) || string.IsNullOrEmpty(purpose))
             {
-                TempData["ErrorMessage"] = "Please fill all required fields correctly!";
-                return RedirectToAction(nameof(HallBooking));
+                ViewBag.Message = "Please fill all required fields!";
+                return View("HallBooking");
             }
 
-            try
+            var booking = new HallBooking
             {
-                var booking = new HallBooking
-                {
-                    HallType = hallType,
-                    Date = date,
-                    StartTime = TimeSpan.Parse(startTime),
-                    EndTime = TimeSpan.Parse(endTime),
-                    Purpose = purpose,
-                    UserId = 1,
-                    CreatedAt = DateTime.Now
-                };
+                HallType = hallType,
+                Date = date,
+                StartTime = startTime,
+                EndTime = endTime,
+                Purpose = purpose,
+                UserId = 1,
+                CreatedAt = DateTime.Now
+            };
 
-                _context.HallBookings.Add(booking);
-                _context.SaveChanges();
+            _context.HallBookings.Add(booking);
+            await _context.SaveChangesAsync();
 
-                TempData["SuccessMessage"] = "Booking submitted successfully!";
-                return RedirectToAction(nameof(MyBookings));
-            }
-            catch (Exception)
-            {
-                TempData["ErrorMessage"] = "Invalid time format or server error!";
-                return RedirectToAction(nameof(HallBooking));
-            }
+            return RedirectToAction("MyBookings");
         }
 
-        // My Bookings
         public IActionResult MyBookings()
         {
             var data = _context.HallBookings.ToList();
@@ -173,13 +196,6 @@ namespace Society_Management_System.Controllers
         // ---------------- Profile ----------------
         public IActionResult Profile()
         {
-            // Temporary user data (replace with DB/session later)
-            ViewBag.Name = "Trushali Sorathiya";
-            ViewBag.Email = "trushali@gmail.com";
-            ViewBag.Contact = "9876543210";
-            ViewBag.Flat = "101";
-            ViewBag.Wing = "A";
-
             return View();
         }
     }

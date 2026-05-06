@@ -1,4 +1,6 @@
-﻿
+@model IEnumerable<Society_Management_System.Models.Visitor>
+@using System.Linq
+
 @{
     ViewBag.Title = "Visitor List";
     Layout = "~/Views/Shared/UserLayout.cshtml";
@@ -119,11 +121,11 @@
                                     <td>@item.VisitorName</td>
                                     <td>@item.Purpose</td>
                                     <td>@item.ContactNumber</td>
-                                    <td>@item.VisitDate.ToString("dd-MM-yyyy")</td>
+                                    <td>@item.RequestDate.ToString("dd-MM-yyyy")</td>
 
                                     <td>
-                                        <a href="/User/EditVisitor/@item.Id" class="btn action-btn btn-edit">Edit</a>
-                                        <a href="/User/DeleteVisitor/@item.Id"
+                                        <a href="/User/EditVisitor/@item.VisitorId" class="btn action-btn btn-edit">Edit</a>
+                                        <a href="/User/DeleteVisitor/@item.VisitorId"
                                            class="btn action-btn btn-delete"
                                            onclick="return confirm('Are you sure?');">
                                             Delete
