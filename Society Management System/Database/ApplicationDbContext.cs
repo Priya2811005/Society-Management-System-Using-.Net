@@ -10,11 +10,26 @@ namespace Society_Management_System.Data
         {
         }
 
+        public DbSet<User> Users { get; set; }
         public DbSet<Complaint> Complaints { get; set; }
+        public DbSet<Maintenance> Maintenances { get; set; }
         public DbSet<Visitor> Visitors { get; set; }
-        public DbSet<HallBooking> HallBookings { get; set; }
-        public DbSet<Admin> Admins { get; set; }
+        public object HallBookings { get; internal set; }
 
-        // Add other DbSets (User, Notice, Visitor, etc.) as needed
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Seed Admin User
+            modelBuilder.Entity<User>().HasData(new User
+            {
+                UserId = 1,
+                Name = "Admin",
+                Email = "admin@gmail.com",
+                Password = "123456", // In production, use hashed password
+                Role = "Admin",
+                CreatedDate = DateTime.Now
+            });
+        }
     }
 }

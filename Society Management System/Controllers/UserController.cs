@@ -1,138 +1,37 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Society_Management_System.Data;
+using Microsoft.AspNetCore.Mvc;
 using Society_Management_System.Models;
+using Society_Management_System.Data;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using System;
+
 
 namespace Society_Management_System.Controllers
 {
     public class UserController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly IWebHostEnvironment _env;
+        private readonly IWebHostEnvironment _environment;
 
-        // Single constructor with both dependencies
-        public UserController(ApplicationDbContext context, IWebHostEnvironment env)
+        public UserController(ApplicationDbContext context, IWebHostEnvironment environment)
         {
             _context = context;
-            _env = env;
+            _environment = environment;
         }
 
+        // ---------------- Dashboard ----------------
         public IActionResult Dashboard()
         {
             return View();
         }
 
-        // GET: User/AddComplaint
-        public IActionResult AddComplaint()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-
-        public async Task<IActionResult> AddComplaint(Complaint model, IFormFile? ImageFile)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    // Image Upload
-                    if (ImageFile != null && ImageFile.Length > 0)
-                    {
-                        string folder = Path.Combine(_env.WebRootPath, "uploads");
-
-                        if (!Directory.Exists(folder))
-                            Directory.CreateDirectory(folder);
-
-                        string fileName = Guid.NewGuid() + "_" + ImageFile.FileName;
-                        string path = Path.Combine(folder, fileName);
-
-                        using (var stream = new FileStream(path, FileMode.Create))
-                        {
-                            await ImageFile.CopyToAsync(stream);
-                        }
-
-                        model.ImagePath = "/uploads/" + fileName;
-                    }
-
-                    model.Status = "Pending";
-                    model.UserId = 1;
-
-                    _context.Complaints.Add(model);
-                    await _context.SaveChangesAsync();
-
-                    TempData["Success"] = "Saved Successfully";
-                    return RedirectToAction("AddComplaint");
-                }
-                catch (Exception ex)
-                {
-                    TempData["Error"] = ex.Message;
-                    TempData["Success"] = "Complaint submitted successfully!";
-                }
-            }
-
-            return View(model);
-        }
-
-
-        public IActionResult Notice()
-        {
-            return View();
-        }
-
-        public IActionResult Maintenance()
-        {
-            return View();
-        }
-
-        // GET PAGE
-        public IActionResult AddVisitor()
-        {
-            return View();
-        }
-
-        // POST METHOD
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddVisitor(Visitor model)
-        {
-            // 🔥 REMOVE unwanted validation
-            ModelState.Remove("UserId");
-
-            if (!ModelState.IsValid)
-            {
-                var errors = ModelState.Values
-                    .SelectMany(v => v.Errors)
-                    .Select(e => e.ErrorMessage)
-                    .ToList();
-
-                TempData["Error"] = string.Join(", ", errors);
-                return View(model);
-            }
-
-            try
-            {
-                model.UserId = 1; // TEMP
-                model.RequestDate = DateTime.Now;
-
-                _context.Visitors.Add(model);
-                await _context.SaveChangesAsync();
-
-                TempData["Success"] = "Visitor Request Submitted Successfully!";
-                return RedirectToAction("AddVisitor");
-            }
-            catch (Exception ex)
-            {
-                TempData["Error"] = "Database error: " + (ex.InnerException?.Message ?? ex.Message);
-                return View(model);
-            }
-        }
-
-        // ---------------- HALL BOOKING ----------------
+        // ---------------- Complaint ----------------
 
         // GET
-        public IActionResult HallBooking()
+        public IActionResult AddComplain()
         {
             return View();
         }
@@ -140,37 +39,126 @@ namespace Society_Management_System.Controllers
         // POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SaveHallBooking(HallBooking model)
+        public async Task<IActionResult> AddComplain(string title, string description, IFormFile imageFile)
         {
-            if (ModelState.IsValid)
+            if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(description))
             {
-                try
-                {
-                    model.UserId = 1; // Replace later with logged-in user
-                    model.CreatedAt = DateTime.Now;
-
-                    _context.HallBookings.Add(model);
-                    await _context.SaveChangesAsync();
-
-                    TempData["Success"] = "Hall booked successfully!";
-                    return RedirectToAction("HallBooking");
-                }
-                catch (Exception ex)
-                {
-                    TempData["Error"] = ex.Message;
-                }
+                ViewBag.Message = "Fill all fields!";
+                return View();
             }
 
-            return View("HallBooking", model);
+            var complaint = new Complaint
+            {
+                Title = title,
+                Description = description,
+                Status = "Pending",
+                UserId = 1,
+                CreatedDate = DateTime.Now
+            };
+
+            if (imageFile != null)
+            {
+                string folder = Path.Combine(_environment.WebRootPath, "complaints");
+
+                if (!Directory.Exists(folder))
+                    Directory.CreateDirectory(folder);
+
+                string fileName = Guid.NewGuid() + "_" + imageFile.FileName;
+                string path = Path.Combine(folder, fileName);
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await imageFile.CopyToAsync(stream);
+                }
+
+                complaint.ImagePath = "/complaints/" + fileName;
+            }
+
+            _context.Complaints.Add(complaint);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("ComplaintList");
         }
 
+        public IActionResult ComplaintList()
+        {
+            var data = _context.Complaints.ToList();
+            return View(data);
+        }
+
+        // ---------------- Notice ----------------
+        public IActionResult Notice()
+        {
+            return View();
+        }
+        public IActionResult Maintenance()
+        {
+            // Dummy maintenance data
+            ViewBag.Month = "May 2026";
+            ViewBag.Amount = "1500.00";
+            ViewBag.DueDate = "May 10, 2026";
+            ViewBag.Status = "Unpaid";
+
+            return View();
+        }
+
+
+        // ---------------- Visitor ----------------
+
+        // Add Visitor
+        public IActionResult AddVisitor()
+        {
+            return View();
+        }
+
+        // Visitor List
+        public IActionResult VisitorList()
+        {
+            return View();
+        }
+
+        // ---------------- Hall Booking ----------------
+
+        // GET: Hall Booking
+        [HttpGet]
+        public IActionResult HallBooking()
+        {
+            return View();
+        }
+
+        // POST: Save Hall Booking
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult SaveHallBooking(string hallType, DateTime date, string startTime, string endTime, string purpose)
+        {
+            if (string.IsNullOrEmpty(hallType) || string.IsNullOrEmpty(purpose))
+            {
+                TempData["ErrorMessage"] = "Please fill all required fields!";
+                return RedirectToAction(nameof(HallBooking));
+            }
+
+            // TODO: Save booking to database
+
+            TempData["SuccessMessage"] = "Booking submitted successfully!";
+            return RedirectToAction(nameof(MyBookings));
+        }
+
+        // My Bookings
+        public IActionResult MyBookings()
+        {
+            return View();
+        }
+
+        // ---------------- Profile ----------------
         public IActionResult Profile()
         {
+            // Temporary user data (replace with DB/session later)
             ViewBag.Name = "Trushali Sorathiya";
             ViewBag.Email = "trushali@gmail.com";
             ViewBag.Contact = "9876543210";
             ViewBag.Flat = "101";
             ViewBag.Wing = "A";
+
             return View();
         }
     }

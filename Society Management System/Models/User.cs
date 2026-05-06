@@ -18,10 +18,12 @@ namespace Society_Management_System.Models
 
         [Required]
         [StringLength(100)]
-        public string Password { get; set; } // For demo purposes plain text. Use hashing in production.
+        public string Password { get; set; }
 
         [Required]
         [StringLength(20)]
         public string Role { get; set; } // "Admin" or "User"
+
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
     }
 }

@@ -1,0 +1,33 @@
+@model IEnumerable<Society_Management_System.Models.Maintenance>
+@{
+    ViewData["Title"] = "Maintenance Bills";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Maintenance Bills</h2>
+    <a asp-action="AddMaintenance" class="btn btn-primary">Add New Bill</a>
+</div>
+
+<table class="table table-bordered shadow-sm">
+    <thead class="table-dark">
+        <tr>
+            <th>User</th>
+            <th>Amount</th>
+            <th>Due Date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var m in Model)
+        {
+            <tr>
+                <td>@m.User.Name</td>
+                <td>@m.Amount.ToString("C")</td>
+                <td>@m.DueDate.ToShortDateString()</td>
+                <td>
+                    <span class="badge @(m.Status == "Paid" ? "bg-success" : "bg-danger")">@m.Status</span>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

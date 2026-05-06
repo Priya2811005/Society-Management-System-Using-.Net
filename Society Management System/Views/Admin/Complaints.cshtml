@@ -1,0 +1,46 @@
+@model IEnumerable<Society_Management_System.Models.Complaint>
+@{
+    ViewData["Title"] = "Manage Complaints";
+}
+
+<h2 class="mb-4">All Complaints</h2>
+
+<table class="table table-bordered shadow-sm">
+    <thead class="table-dark">
+        <tr>
+            <th>User</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.User.Name</td>
+                <td>@c.Title</td>
+                <td>@c.Description</td>
+                <td>
+                    <span class="badge @(c.Status == "Pending" ? "bg-warning" : c.Status == "In Progress" ? "bg-info" : "bg-success")">
+                        @c.Status
+                    </span>
+                </td>
+                <td>@c.CreatedDate.ToShortDateString()</td>
+                <td>
+                    <form asp-action="UpdateComplaintStatus" method="post" class="d-inline">
+                        <input type="hidden" name="id" value="@c.ComplaintId" />
+                        <select name="status" class="form-select form-select-sm d-inline-block w-auto" onchange="this.form.submit()">
+                            <option selected disabled>Update Status</option>
+                            <option value="Pending">Pending</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Resolved">Resolved</option>
+                        </select>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

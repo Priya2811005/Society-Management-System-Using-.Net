@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Society_Management_System.Data;
 
@@ -11,9 +12,11 @@ using Society_Management_System.Data;
 namespace Society_Management_System.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260505152653_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,9 +38,6 @@ namespace Society_Management_System.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImagePath")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status")
@@ -126,7 +126,7 @@ namespace Society_Management_System.Migrations
                         new
                         {
                             UserId = 1,
-                            CreatedDate = new DateTime(2026, 5, 6, 16, 28, 44, 95, DateTimeKind.Local).AddTicks(3416),
+                            CreatedDate = new DateTime(2026, 5, 5, 20, 56, 53, 417, DateTimeKind.Local).AddTicks(3734),
                             Email = "admin@gmail.com",
                             Name = "Admin",
                             Password = "123456",

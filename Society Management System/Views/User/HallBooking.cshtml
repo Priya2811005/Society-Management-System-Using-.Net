@@ -75,6 +75,7 @@
         <!-- Left Buttons -->
         <div class="col-md-3">
             <a href="#" class="btn btn-primary side-btn">Booking Form</a>
+            <a href="/User/MyBookings" class="btn btn-outline-primary side-btn">My Bookings</a>
         </div>
 
         <!-- Form Section -->
@@ -82,26 +83,13 @@
             <div class="form-card">
 
                 <h4 class="fw-bold mb-4">Hall Booking Form</h4>
-                @model Society_Management_System.Models.HallBooking
 
-
-                @if (TempData["Success"] != null)
-                {
-                    <div class="alert alert-success">@TempData["Success"]</div>
-                }
-
-                @if (TempData["Error"] != null)
-                {
-                    <div class="alert alert-danger">@TempData["Error"]</div>
-                }
-                <form asp-action="SaveHallBooking" method="post">
-                    @Html.AntiForgeryToken()
+                <form method="post" action="/User/SaveHallBooking">
 
                     <!-- Hall Type -->
                     <div class="mb-3">
                         <label>Hall Type</label>
-                        <select asp-for="HallType" class="form-control">
-                            <option value="">-- Select Hall --</option>
+                        <select class="form-control" name="HallType">
                             <option>Hall A (Capacity: 50)</option>
                             <option>Hall B (Capacity: 100)</option>
                             <option>Hall C (Capacity: 200)</option>
@@ -111,26 +99,27 @@
                     <!-- Date -->
                     <div class="mb-3">
                         <label>Date</label>
-                        <input asp-for="BookingDate" type="date" class="form-control" />
+                        <input type="date" name="Date" class="form-control" />
                     </div>
 
-                    <!-- Time -->
+                    <!-- Time Row -->
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label>Start Time</label>
-                            <input asp-for="StartTime" type="time" class="form-control" />
+                            <input type="time" name="StartTime" class="form-control" />
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label>End Time</label>
-                            <input asp-for="EndTime" type="time" class="form-control" />
+                            <input type="time" name="EndTime" class="form-control" />
                         </div>
                     </div>
 
                     <!-- Purpose -->
                     <div class="mb-3">
                         <label>Purpose</label>
-                        <textarea asp-for="Purpose" class="form-control"></textarea>
+                        <textarea name="Purpose" class="form-control" rows="3"
+                                  placeholder="Enter purpose here"></textarea>
                     </div>
 
                     <!-- Submit -->

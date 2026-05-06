@@ -1,4 +1,4 @@
-﻿@{
+@{
     ViewBag.Title = "Complaint";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
@@ -115,46 +115,34 @@
         <!-- Left Buttons -->
         <div class="col-md-2">
             <a href="/User/AddComplain" class="btn btn-primary side-btn">Complaint Form</a>
+            <a href="/User/ComplaintList" class="btn btn-outline-primary side-btn">Complaint List</a>
         </div>
 
         <!-- Form Section -->
         <div class="col-md-6">
             <div class="form-card">
-                @if (TempData["Success"] != null)
-                {
-                    <div class="alert alert-success">
-                        @TempData["Success"]
-                    </div>
-                }
-
-                @if (TempData["Error"] != null)
-                {
-                    <div class="alert alert-danger">
-                        @TempData["Error"]
-                    </div>
-                }
 
                 <h5 class="mb-3 fw-bold">Add Complaint</h5>
 
-                <form method="post" enctype="multipart/form-data">
-                    @Html.AntiForgeryToken()
-                    <!-- Complaint Date -->
+                <form asp-action="AddComplain" asp-controller="User" method="post" enctype="multipart/form-data">
+
+                    <!-- Title -->
                     <div class="mb-3">
-                        <label class="form-label">Complaint Date</label>
-                        <input type="date" name="ComplaintDate" class="form-control" required />
+                        <label class="form-label">Subject / Title</label>
+                        <input type="text" name="title" class="form-control" placeholder="Enter Complaint Title" required />
                     </div>
 
                     <!-- Description -->
                     <div class="mb-3">
                         <label class="form-label">Description</label>
-                        <textarea name="Description" class="form-control" rows="3"
+                        <textarea name="description" class="form-control" rows="3"
                                   placeholder="Type Description Here" required></textarea>
                     </div>
 
                     <!-- Upload Image -->
                     <div class="mb-3">
                         <label class="form-label">Upload Image</label>
-                        <input type="file" name="ImageFile" class="form-control"
+                        <input type="file" name="imageFile" class="form-control"
                                accept="image/*" onchange="previewImage(event)" />
 
                         <!-- Preview -->
@@ -172,6 +160,7 @@
 
             </div>
         </div>
+
 
     </div>
 

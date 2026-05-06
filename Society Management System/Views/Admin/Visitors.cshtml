@@ -1,0 +1,28 @@
+@model IEnumerable<Society_Management_System.Models.Visitor>
+@{
+    ViewData["Title"] = "Visitor Records";
+}
+
+<h2 class="mb-4">Visitor Records</h2>
+
+<table class="table table-bordered shadow-sm">
+    <thead class="table-dark">
+        <tr>
+            <th>Visitor Name</th>
+            <th>Purpose</th>
+            <th>Visit Date</th>
+            <th>Added By (User)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var v in Model)
+        {
+            <tr>
+                <td>@v.Name</td>
+                <td>@v.Purpose</td>
+                <td>@v.VisitDate.ToString("g")</td>
+                <td>@v.User.Name</td>
+            </tr>
+        }
+    </tbody>
+</table>
