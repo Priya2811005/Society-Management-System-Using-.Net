@@ -1,14 +1,58 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using Society_Management_System.Data;
+using Society_Management_System.Models;
+using System.Linq;
+using System;
 
 namespace Society_Management_System.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly ApplicationDbContext _context;
+
+        public AccountController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
         // LOGIN PAGE
         public IActionResult Login()
         {
+            return View();
+        }
+
+        // LOGIN POST
+        [HttpPost]
+        public IActionResult Login(string Email, string Password)
+        {
+            if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password))
+            {
+                ViewBag.Error = "Please enter email and password";
+                return View();
+            }
+
+            var user = _context.Users.FirstOrDefault(u => u.Email == Email && u.Password == Password);
+
+            if (user != null)
+            {
+                // Set Session
+                HttpContext.Session.SetString("UserId", user.UserId.ToString());
+                HttpContext.Session.SetString("Name", user.Name);
+                HttpContext.Session.SetString("Role", user.Role);
+
+                // Redirect based on role
+                if (user.Role == "Admin")
+                {
+                    return RedirectToAction("Dashboard", "Admin");
+                }
+                else
+                {
+                    return RedirectToAction("Dashboard", "User");
+                }
+            }
+
+            ViewBag.Error = "Invalid Email or Password";
             return View();
         }
 
@@ -20,7 +64,7 @@ namespace Society_Management_System.Controllers
 
         // REGISTER POST
         [HttpPost]
-        public IActionResult Register(string FullName, string Email, string Phone, string Password, string ConfirmPassword)
+        public IActionResult Register(string FullName, string Email, string Password, string ConfirmPassword)
         {
             if (string.IsNullOrEmpty(FullName) || string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password))
             {
@@ -34,7 +78,25 @@ namespace Society_Management_System.Controllers
                 return View();
             }
 
-            ViewBag.Message = "Registration Successful! Please Login.";
+            // Check if email exists
+            if (_context.Users.Any(u => u.Email == Email))
+            {
+                ViewBag.Error = "Email already registered";
+                return View();
+            }
+
+            var newUser = new User
+            {
+                Name = FullName,
+                Email = Email,
+                Password = Password,
+                Role = "User",
+                CreatedDate = DateTime.Now
+            };
+
+            _context.Users.Add(newUser);
+            _context.SaveChanges();
+
             return RedirectToAction("Login");
         }
 
@@ -58,7 +120,7 @@ namespace Society_Management_System.Controllers
             int otp = rand.Next(100000, 999999);
 
             HttpContext.Session.SetString("OTP", otp.ToString());
-            HttpContext.Session.SetString("Email", email);
+            HttpContext.Session.SetString("ResetEmail", email);
 
             ViewBag.Message = "OTP Sent Successfully";
 
@@ -108,7 +170,13 @@ namespace Society_Management_System.Controllers
                 return View();
             }
 
-            // Here you would normally update password in database
+            string email = HttpContext.Session.GetString("ResetEmail");
+            var user = _context.Users.FirstOrDefault(u => u.Email == email);
+            if (user != null)
+            {
+                user.Password = password;
+                _context.SaveChanges();
+            }
 
             return RedirectToAction("ResetPasswordSuccess");
         }
@@ -119,5 +187,10 @@ namespace Society_Management_System.Controllers
             return View();
         }
 
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Login");
+        }
     }
-}
+}
